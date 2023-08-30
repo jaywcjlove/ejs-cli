@@ -1,0 +1,21 @@
+{
+  "name": "@wcj/examples",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "ejs-cli 'template/*.ejs' 'template/about/*.ejs'",
+    "start": "ejs-cli 'template/*.ejs' 'template/about/*.ejs' --watch"
+  },
+  "devDependencies": {
+    "@wcj/ejs-cli": "0.0.1"
+  },
+  "ejsc": {
+    "data": {
+      "template/home.ejs": {
+        "name": "Hello World",
+        "age": 36
+      }
+    }
+  }
+}

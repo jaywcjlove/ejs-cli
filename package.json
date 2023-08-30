@@ -1,0 +1,41 @@
+{
+  "private": true,
+  "scripts": {
+    "prepare": "husky install",
+    "build": "lerna exec --scope @wcj/ejs-cli -- npm run build",
+    "watch": "lerna exec --scope @wcj/ejs-cli -- npm run watch",
+    "version": "lerna version --exact --force-publish --no-push --no-git-tag-version",
+    "type-check": "lerna exec \"tsc --noEmit\" --scope create-tsbb --scope tsbb --scope @tsbb/* --stream",
+    "prettier": "prettier --write '**/*.{js,mts,ts,less,md,json}'",
+    "clean": "lerna clean --yes",
+    "test": "node packages/tsbb/lib/cli.js test",
+    "coverage": "node packages/tsbb/lib/cli.js test --coverage --bai"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jaywcjlove/ejs-cli.git"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "workspaces": [
+    "core",
+    "examples"
+  ],
+  "lint-staged": {
+    "*.{js,mts,ts,md,json}": [
+      "prettier --write"
+    ]
+  },
+  "devDependencies": {
+    "husky": "^8.0.3",
+    "lerna": "^7.0.0",
+    "lint-staged": "^14.0.1",
+    "prettier": "^3.0.3",
+    "typescript": "^5.2.2",
+    "jest": "^29.5.0",
+    "jest-watch-typeahead": "^2.2.2",
+    "jest-environment-jsdom": "~29.5.0",
+    "jest-environment-node": "^29.5.0"
+  }
+}

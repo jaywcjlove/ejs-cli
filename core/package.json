@@ -1,0 +1,37 @@
+{
+  "name": "@wcj/ejs-cli",
+  "description": "An enhanced version of the EJS cli.",
+  "version": "0.0.1",
+  "author": "jaywcjlove",
+  "license": "MIT",
+  "type": "module",
+  "main": "./lib/index.mjs",
+  "module": "./lib/index.mjs",
+  "types": "./lib/index.d.ts",
+  "exports": {
+    ".": "./lib/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch"
+  },
+  "bin": {
+    "ejs-cli": "./lib/cli.mjs",
+    "ejsc": "./lib/cli.mjs"
+  },
+  "keywords": [],
+  "dependencies": {
+    "auto-config-loader": "^1.7.4",
+    "chokidar": "^3.5.3",
+    "ejs": "^3.1.9",
+    "fs-extra": "^11.1.1",
+    "glob": "^10.3.3",
+    "meow": "12.1.0"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.1",
+    "@types/node": "^20.5.7",
+    "@types/ejs": "^3.1.2",
+    "typescript": "^5.2.2"
+  }
+}
