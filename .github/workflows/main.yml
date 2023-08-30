@@ -17,6 +17,13 @@ jobs:
       - run: npm install
       - run: npm run build
       - run: npm install idoc@1.26.6 -g
+      - name: Create idoc config.
+        run: |
+          cat > idoc.yml << EOF
+          site: "EJS Cli {{version}}"
+          menus:
+            Home: index.html
+          EOF
       - run: idoc -s "EJS Cli {{version}}"
 
       - name: Generate Contributors Images
