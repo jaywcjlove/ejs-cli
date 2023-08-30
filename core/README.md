@@ -65,7 +65,7 @@ Support [JSON](https://www.json.org), [JSONC](https://github.com/microsoft/node-
 
 `.ejscrc.mjs` config example:
 
-```mjs
+```js
 /**
  * @type {import('@wcj/ejs-cli/lib/watch.mjs').Options}
  */
