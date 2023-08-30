@@ -19,6 +19,13 @@ jobs:
       - run: npm install idoc@1.26.6 -g
       - run: idoc -s "EJS Cli {{version}}"
 
+      - name: Generate Contributors Images
+        uses: jaywcjlove/github-action-contributors@main
+        with:
+          filter-author: (renovate\[bot\]|renovate-bot|dependabot\[bot\])
+          output: dist/CONTRIBUTORS.svg
+          avatarSize: 42
+
       - name: Deploy Website
         uses: peaceiris/actions-gh-pages@v3
         with:
@@ -34,6 +41,7 @@ jobs:
         uses: jaywcjlove/create-tag-action@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          package-path: core/package.json
 
       - name: Generate Changelog
         id: changelog
@@ -45,8 +53,15 @@ jobs:
           filter-author: (小弟调调™|Renovate Bot|renovate-bot)
           filter: '[R|r]elease[d]\s+[v|V]\d(\.\d+){0,2}'
 
+      - name: package.json info
+        uses: jaywcjlove/github-action-package@main
+        with:
+          path: core/package.json
+          unset: scripts,devDependencies
+
       - run: npm publish --access public
         continue-on-error: true
+        working-directory: core
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 

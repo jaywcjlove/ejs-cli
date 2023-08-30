@@ -19,7 +19,10 @@
     "ejs-cli": "./lib/cli.mjs",
     "ejsc": "./lib/cli.mjs"
   },
-  "keywords": [],
+  "keywords": [
+    "ejs",
+    "cli"
+  ],
   "dependencies": {
     "auto-config-loader": "^1.7.4",
     "chokidar": "^3.5.3",
