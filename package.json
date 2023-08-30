@@ -1,5 +1,6 @@
 {
   "private": true,
+  "version": "1.0.0",
   "scripts": {
     "prepare": "husky install",
     "build": "lerna exec --scope @wcj/ejs-cli -- npm run build",
