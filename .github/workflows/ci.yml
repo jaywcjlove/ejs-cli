@@ -23,6 +23,8 @@ jobs:
       - run: npm install
       - run: npm run build
       # - run: npm run test
+      - run: npm run build
+        working-directory: examples
 
   windows: 
     name: Windows Node.js
@@ -42,3 +44,5 @@ jobs:
       - run: npm install
       - run: npm run build
       # - run: npm run test
+      - run: npm run build
+        working-directory: examples
