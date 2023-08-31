@@ -1,6 +1,6 @@
 {
   "name": "@wcj/examples",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
     "start": "ejs-cli 'template/**/*' -f data.json --watch"
   },
   "devDependencies": {
-    "@wcj/ejs-cli": "1.1.2"
+    "@wcj/ejs-cli": "1.1.3"
   },
   "ejsc": {
     "data": {
