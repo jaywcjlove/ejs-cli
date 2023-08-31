@@ -63,7 +63,10 @@ Copyright 2023
 Folders and `.ejs` files starting with an _underscore_ (`_`) will be ignored.
 
 ```shell
+$ ejs-cli "template/**/*"
 $ ejsc "template/**/*"
+$ ejsc "template/*.ejs" "template/about/*.ejs"
+$ ejsc "template/home.ejs" "template/about.ejs"
 ```
 
 The above command: matches all `.ejs` files in the template folder, excluding files starting with **`_`** and `.ejs` files in folders starting with **`_`**.
@@ -99,7 +102,7 @@ If the specified `./temp.json` injection data content is an **array**, the value
 - `./temp/temp.json` => `TEMP`
 
 ```js
-//=> ./a/data-name.js
+//=> ./a/data-name.json
 [
   { name: "ejs", version: "v1.2" },
   { name: "auto-config-loader", version: "^1.7.4" },
