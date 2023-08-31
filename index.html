@@ -112,8 +112,14 @@ Copyright 2023
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
         <h2 id="match-files"><a aria-hidden="true" tabindex="-1" href="#match-files" class="anchor"><span class="icon icon-link"></span></a>Match files</h2>
         <p>Folders and <code>.ejs</code> files starting with an <em>underscore</em> (<code>_</code>) will be ignored.</p>
-        <pre class="language-shell"><code class="language-shell code-highlight"><span class="code-line line-number" line="1">$ ejsc <span class="token string">"template/**/*"</span>
-</span></code><input type="hidden" value="$ ejsc &#x22;template/**/*&#x22;
+        <pre class="language-shell"><code class="language-shell code-highlight"><span class="code-line line-number" line="1">$ ejs-cli <span class="token string">"template/**/*"</span>
+</span><span class="code-line line-number" line="2">$ ejsc <span class="token string">"template/**/*"</span>
+</span><span class="code-line line-number" line="3">$ ejsc <span class="token string">"template/*.ejs"</span> <span class="token string">"template/about/*.ejs"</span>
+</span><span class="code-line line-number" line="4">$ ejsc <span class="token string">"template/home.ejs"</span> <span class="token string">"template/about.ejs"</span>
+</span></code><input type="hidden" value="$ ejs-cli &#x22;template/**/*&#x22;
+$ ejsc &#x22;template/**/*&#x22;
+$ ejsc &#x22;template/*.ejs&#x22; &#x22;template/about/*.ejs&#x22;
+$ ejsc &#x22;template/home.ejs&#x22; &#x22;template/about.ejs&#x22;
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
         <p>The above command: matches all <code>.ejs</code> files in the template folder, excluding files starting with <strong><code>_</code></strong> and <code>.ejs</code> files in folders starting with <strong><code>_</code></strong>.</p>
         <h2 id="inject-data"><a aria-hidden="true" tabindex="-1" href="#inject-data" class="anchor"><span class="icon icon-link"></span></a>Inject data</h2>
@@ -142,12 +148,12 @@ Copyright 2023
           <li><code>./temp/data.json</code> => <code>DATA</code></li>
           <li><code>./temp/temp.json</code> => <code>TEMP</code></li>
         </ul>
-        <pre class="language-js"><code class="language-js code-highlight"><span class="code-line line-number" line="1"><span class="token comment">//=> ./a/data-name.js</span>
+        <pre class="language-js"><code class="language-js code-highlight"><span class="code-line line-number" line="1"><span class="token comment">//=> ./a/data-name.json</span>
 </span><span class="code-line line-number" line="2"><span class="token punctuation">[</span>
 </span><span class="code-line line-number" line="3">  <span class="token punctuation">{</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"ejs"</span><span class="token punctuation">,</span> <span class="token literal-property property">version</span><span class="token operator">:</span> <span class="token string">"v1.2"</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
 </span><span class="code-line line-number" line="4">  <span class="token punctuation">{</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"auto-config-loader"</span><span class="token punctuation">,</span> <span class="token literal-property property">version</span><span class="token operator">:</span> <span class="token string">"^1.7.4"</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
 </span><span class="code-line line-number" line="5"><span class="token punctuation">]</span><span class="token punctuation">;</span>
-</span></code><input type="hidden" value="//=> ./a/data-name.js
+</span></code><input type="hidden" value="//=> ./a/data-name.json
 [
   { name: &#x22;ejs&#x22;, version: &#x22;v1.2&#x22; },
   { name: &#x22;auto-config-loader&#x22;, version: &#x22;^1.7.4&#x22; },
