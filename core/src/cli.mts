@@ -91,7 +91,7 @@ import { helpStr } from "./help.mjs";
     };
 
     const conf = autoConf<Options>("ejsc", {
-      mustExist: true,
+      mustExist: false,
       default: defaultOption,
     });
 
