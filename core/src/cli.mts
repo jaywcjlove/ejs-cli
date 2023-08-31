@@ -79,7 +79,6 @@ import { helpStr } from "./help.mjs";
         childrenIgnored: (p) => p.name.startsWith("_"),
       },
     });
-    console.log("entry:2", entry);
     const isWatch = cli.flags.watch;
 
     const defaultOption: Options = {
