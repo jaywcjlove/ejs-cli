@@ -107,7 +107,7 @@ export function toHTML(
 
 export const getInjectData = (fileName: string) => {
   const redata = fs.readJSONSync(path.resolve(fileName));
-  const keyName = path.basename(fileName, ".json");
+  const keyName = path.basename(fileName, ".json").replace(/(-|\.)/g, "_");
   return Array.isArray(redata)
     ? { [keyName.toLocaleUpperCase()]: redata }
     : redata;

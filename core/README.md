@@ -92,6 +92,30 @@ You need to specify the data file `--data-file ./data.json` on the command line,
 <h2><%= GLOBEL.helloworld %></h2>
 ```
 
+If the specified `./temp.json` injection data content is an **array**, the value will be assigned to the template variable of `TEMP`. The variable naming rule is uppercase for file names:
+
+- `./a/data-name.json` => `DATA_NAME`
+- `./temp/data.json` => `DATA`
+- `./temp/temp.json` => `TEMP`
+
+```js
+//=> ./a/data-name.js
+[
+  { name: "ejs", version: "v1.2" },
+  { name: "auto-config-loader", version: "^1.7.4" },
+];
+```
+
+The value will be assigned to the template variable of `DATA_NAME`
+
+```ejs
+<% DATA_NAME.forEach((item) => { %>
+  <div><%= item.name %>@<%= item.version %></div>
+<% }); %>
+```
+
+The rules are the same in configuration.
+
 **Specific Template**
 
 Inject data into a specific template, which needs to be configured in `.ejscrc.mjs`:
