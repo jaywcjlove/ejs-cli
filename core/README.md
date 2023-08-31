@@ -22,7 +22,7 @@ $ ejsc "template/*.ejs" "template/about/*.ejs" --watch
 
 ## Command Help
 
-Below is a help of commands you might find useful.
+Below is a help of commands you might find useful. You can use the `ejsc` and `ejs-cli` commands:
 
 ```shell
 Usage: ejs-cli <source...> [options]
@@ -41,11 +41,22 @@ Examples:
 
   $ ejsc "template/*.ejs" "template/about/*.ejs"
   $ ejsc "template/*.ejs" "template/about/*.ejs" --watch
-  $ ejsc "template/*.ejs" --watch
+  # The above command: matches all `.ejs` files in the template folder
+  $ ejsc "template/**/*" --watch
   $ ejs-cli "template/*.ejs" --watch
 
 Copyright 2023
 ```
+
+## Match files
+
+Folders and `.ejs` files starting with an _underscore_ (`_`) will be ignored.
+
+```shell
+$ ejsc "template/**/*"
+```
+
+The above command: matches all `.ejs` files in the template folder, excluding files starting with **`_`** and `.ejs` files in folders starting with **`_`**.
 
 ## Inject data
 

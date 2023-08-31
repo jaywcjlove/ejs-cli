@@ -37,11 +37,8 @@ export async function watch(
         fs.removeSync(outputPath);
         console.log("🗑️ Delete folder \x1b[32;1m%s\x1b[0m !!!", filepath);
       }
-      const isPartial = !!filepath
-        .split(path.sep)
-        .find((m) => m.startsWith("_"));
 
-      if (!/(add|change)$/i.test(eventName) || isPartial) return;
+      if (!/(add|change)$/i.test(eventName)) return;
 
       if (/(.ejs)$/.test(filepath)) {
         try {

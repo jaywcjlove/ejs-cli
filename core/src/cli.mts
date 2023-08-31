@@ -69,7 +69,13 @@ import { helpStr } from "./help.mjs";
     const output = path.resolve(process.cwd(), cli.flags.out);
     let entry = [...cli.input];
 
-    entry = await glob(entry, { ignore: "node_modules/**" });
+    entry = await glob(entry, {
+      ignore: {
+        ignored: (p) => !/\.ejs$/i.test(p.name) || p.name.startsWith("_"),
+        childrenIgnored: (p) => p.name.startsWith("_"),
+      },
+    });
+    console.log("entry:2", entry);
     const isWatch = cli.flags.watch;
 
     const defaultOption: Options = {

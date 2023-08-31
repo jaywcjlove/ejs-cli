@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "ejs-cli 'template/*.ejs' 'template/about/*.ejs' -f data.json",
-    "start": "ejs-cli 'template/*.ejs' 'template/about/*.ejs' -f data.json --watch"
+    "build": "ejs-cli 'template/**/*' -f data.json",
+    "start": "ejs-cli 'template/**/*' -f data.json --watch"
   },
   "devDependencies": {
     "@wcj/ejs-cli": "1.1.0"
