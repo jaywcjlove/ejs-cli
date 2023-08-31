@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@wcj/ejs-cli EJS Cli 1.0.0</title>
+    <title>ejs-cli EJS Cli 1.0.0</title>
     <meta name="description" content="An enhanced version of the EJS cli.">
     <link rel="stylesheet" type="text/css" href="css/main.css?v=1.26.6">
     <link rel="stylesheet" type="text/css" href="css/tocbot.css?v=1.26.6">
@@ -33,7 +33,7 @@
     </header>
     <div class="warpper-content warpper">
       <markdown-style>
-        <h1 id="wcjejs-cli"><a aria-hidden="true" tabindex="-1" href="#wcjejs-cli" class="anchor"><span class="icon icon-link"></span></a>@wcj/ejs-cli</h1>
+        <h1 id="ejs-cli"><a aria-hidden="true" tabindex="-1" href="#ejs-cli" class="anchor"><span class="icon icon-link"></span></a>ejs-cli</h1>
         <p>
           <a href="https://github.com/jaywcjlove/ejs-cli/actions/workflows/main.yml"><img src="https://github.com/jaywcjlove/ejs-cli/actions/workflows/main.yml/badge.svg" alt="CI"></a>
           <a href="https://npmjs.org/package/@wcj/ejs-cli"><img src="https://img.shields.io/npm/v/@wcj/ejs-cli.svg?style=flat&#x26;label=@wcj/ejs-cli" alt="NPM version"></a>
@@ -123,17 +123,19 @@ Copyright 2023
 </span><span class="code-line line-number" line="3">    <span class="token string-property property">"helloworld"</span><span class="token operator">:</span> <span class="token string">"Hello Wrold!"</span>
 </span><span class="code-line line-number" line="4">  <span class="token punctuation">}</span><span class="token punctuation">,</span>
 </span><span class="code-line line-number" line="5">  <span class="token string-property property">"data"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-</span><span class="code-line line-number" line="6">    <span class="token string-property property">"template/home.ejs"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-</span><span class="code-line line-number" line="7">      <span class="token string-property property">"name"</span><span class="token operator">:</span> <span class="token string">"Hello World"</span><span class="token punctuation">,</span>
-</span><span class="code-line line-number" line="8">      <span class="token string-property property">"age"</span><span class="token operator">:</span> <span class="token number">36</span>
-</span><span class="code-line line-number" line="9">    <span class="token punctuation">}</span>
-</span><span class="code-line line-number" line="10">  <span class="token punctuation">}</span>
-</span><span class="code-line line-number" line="11"><span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="6">    <span class="token string-property property">"template/about/index.ejs"</span><span class="token operator">:</span> <span class="token string">"./data.json"</span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="7">    <span class="token string-property property">"template/home.ejs"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="8">      <span class="token string-property property">"name"</span><span class="token operator">:</span> <span class="token string">"Hello World"</span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="9">      <span class="token string-property property">"age"</span><span class="token operator">:</span> <span class="token number">36</span>
+</span><span class="code-line line-number" line="10">    <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="11">  <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="12"><span class="token punctuation">}</span>
 </span></code><input type="hidden" value="{
   &#x22;globelData&#x22;: {
     &#x22;helloworld&#x22;: &#x22;Hello Wrold!&#x22;
   },
   &#x22;data&#x22;: {
+    &#x22;template/about/index.ejs&#x22;: &#x22;./data.json&#x22;,
     &#x22;template/home.ejs&#x22;: {
       &#x22;name&#x22;: &#x22;Hello World&#x22;,
       &#x22;age&#x22;: 36
