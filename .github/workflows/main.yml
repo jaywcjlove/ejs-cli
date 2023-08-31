@@ -18,6 +18,7 @@ jobs:
       - run: npm run build
       - run: npm install idoc@1.26.6 -g
       - name: Create idoc config.
+        working-directory: core
         run: |
           cat > idoc.yml << EOF
           site: "EJS Cli {{version}}"
@@ -25,12 +26,13 @@ jobs:
             Home: index.html
           EOF
       - run: idoc -s "EJS Cli {{version}}"
+        working-directory: core
 
       - name: Generate Contributors Images
         uses: jaywcjlove/github-action-contributors@main
         with:
           filter-author: (renovate\[bot\]|renovate-bot|dependabot\[bot\])
-          output: dist/CONTRIBUTORS.svg
+          output: core/dist/CONTRIBUTORS.svg
           avatarSize: 42
 
       - name: Deploy Website
@@ -40,7 +42,7 @@ jobs:
           user_email: 'github-actions[bot]@users.noreply.github.com'
           commit_message: ${{ github.event.head_commit.message }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+          publish_dir: ./core/dist
 
 
       - name: Is a tag created auto?
