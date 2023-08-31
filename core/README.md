@@ -1,4 +1,4 @@
-# @wcj/ejs-cli
+# ejs-cli
 
 [![CI](https://github.com/jaywcjlove/ejs-cli/actions/workflows/main.yml/badge.svg)](https://github.com/jaywcjlove/ejs-cli/actions/workflows/main.yml)
 [![NPM version](https://img.shields.io/npm/v/@wcj/ejs-cli.svg?style=flat&label=@wcj/ejs-cli)](https://npmjs.org/package/@wcj/ejs-cli)
@@ -81,6 +81,7 @@ Inject data into a specific template, which needs to be configured in `.ejscrc.m
     "helloworld": "Hello Wrold!"
   },
   "data": {
+    "template/about/index.ejs": "./data.json",
     "template/home.ejs": {
       "name": "Hello World",
       "age": 36

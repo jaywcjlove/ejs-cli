@@ -71,8 +71,20 @@ export function toHTML(
   /** Relative path string concatenation. E.g: `../`, `../../` */
   const PUBLIC_PATH = relative ? relative.split(path.sep).join("/") + "/" : "";
   const ejsData = { ...(data as Data) };
-  const result = toEqualPathOfData(filename, ejsData);
-  return new Promise((resolve, reject) => {
+  let result = toEqualPathOfData(filename, ejsData);
+  return new Promise(async (resolve, reject) => {
+    if (typeof result === "string") {
+      try {
+        const redata = fs.readJSONSync(path.resolve(result));
+        result = redata;
+      } catch (error) {
+        throw new Error(
+          `no such file, \nopen \x1b[33;1m${result}\x1b[0m => \x1b[31;1m'${path.resolve(
+            result,
+          )}'\x1b[0m\n`,
+        );
+      }
+    }
     ejs.renderFile(
       filename,
       { ...result, PUBLIC_PATH, GLOBEL: globelData },

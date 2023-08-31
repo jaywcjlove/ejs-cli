@@ -50,7 +50,6 @@ import { helpStr } from "./help.mjs";
     },
   });
 
-  console.log("cli:", cli);
   try {
     if (cli.flags.h || cli.flags.help) {
       cli.showHelp();
