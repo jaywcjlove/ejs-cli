@@ -29,9 +29,13 @@ Usage: ejs-cli <source...> [options]
 
 Options:
 
-  --out, -o           Specify the input directory (default: "dist").
-  --version, -v       Show version number
-  --help, -h          Show help
+  -v, --version       Show version number
+  -h, --help          Show help
+  -o, --out           Specify the input directory (default: "dist")
+  -m, --delimiter           Use CHARACTER with angle brackets for open/close (defaults to %)
+  -p, --open-delimiter      Use CHARACTER instead of left angle bracket to open.
+  -c, --close-delimiter     Use CHARACTER instead of right angle bracket to close.
+  -f, --data-file FILE      Must be JSON-formatted. Use parsed input from FILE as data for rendering
 
 Examples:
 
@@ -41,6 +45,54 @@ Examples:
   $ ejs-cli "template/*.ejs" --watch
 
 Copyright 2023
+```
+
+## Inject data
+
+Inject data by default
+
+**`PUBLIC_PATH`**
+
+`PUBLIC_PATH` Relative path string concatenation. E.g: `../`, `../../`.
+
+```ejs
+<link rel="stylesheet" href="<%= PUBLIC_PATH %>static/css/main.css">
+
+<img src="<%= PUBLIC_PATH %>static/img/logo.png" />
+
+<a href="<%= PUBLIC_PATH %>about/index.html"><a>
+```
+
+**`GLOBEL`**
+
+You need to specify the data file `--data-file ./data.json` on the command line, or configure the `globelData` field in the configuration
+
+```ejs
+<h2><%= GLOBEL.helloworld %></h2>
+```
+
+**Specific Template**
+
+Inject data into a specific template, which needs to be configured in `.ejscrc.mjs`:
+
+```js
+{
+  "globelData": {
+    "helloworld": "Hello Wrold!"
+  },
+  "data": {
+    "template/home.ejs": {
+      "name": "Hello World",
+      "age": 36
+    }
+  }
+}
+```
+
+Used in `template/home.ejs` template
+
+```ejs
+<h2><%= name %></h2>
 ```
 
 ## Config

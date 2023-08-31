@@ -5,6 +5,17 @@ import fs from "fs-extra";
 
 export interface Options extends EjsOptions {
   /**
+   * Injecting data into all EJS templates
+   * @example
+   * ```json
+   * {
+   *    "name": "Hello World",
+   *    "age": 36
+   * }
+   * ```
+   */
+  globelData?: Data;
+  /**
    * Injecting data into EJS templates
    * @example
    * ```js
@@ -52,8 +63,9 @@ export function toHTML(
   filename: string,
   output: string,
   data: EjsData = {},
-  options = {},
+  options: Options = {},
 ) {
+  const { globelData, ...ejsOption } = options;
   const outputPath = getOutput(filename, output);
   const relative = path.relative(path.dirname(outputPath), output);
   /** Relative path string concatenation. E.g: `../`, `../../` */
@@ -63,8 +75,8 @@ export function toHTML(
   return new Promise((resolve, reject) => {
     ejs.renderFile(
       filename,
-      { ...result, PUBLIC_PATH },
-      options,
+      { ...result, PUBLIC_PATH, GLOBEL: globelData },
+      ejsOption,
       (err, str) => {
         if (err) {
           reject(err);

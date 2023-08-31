@@ -3,9 +3,13 @@ export const helpStr = (version: string = "") => `
   
   Options:
 
-    \x1b[35;1m--out, -o\x1b[0m           Specify the input directory (default: "dist").
-    \x1b[35;1m--version, -v\x1b[0m       Show version number
-    \x1b[35;1m--help, -h\x1b[0m          Show help
+    \x1b[35;1m-v, --version\x1b[0m             Show version number
+    \x1b[35;1m-h, --help\x1b[0m                Show help
+    \x1b[35;1m-o, --out\x1b[0m                 Specify the input directory (default: "dist")
+    \x1b[35;1m-m, --delimiter\x1b[0m           Use CHARACTER with angle brackets for open/close (defaults to %)
+    \x1b[35;1m-p, --open-delimiter\x1b[0m      Use CHARACTER instead of left angle bracket to open.
+    \x1b[35;1m-c, --close-delimiter\x1b[0m     Use CHARACTER instead of right angle bracket to close.
+    \x1b[35;1m-f, --data-file FILE\x1b[0m      Must be JSON-formatted. Use parsed input from FILE as data for rendering
 
   Examples:
 
