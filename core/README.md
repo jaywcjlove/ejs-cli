@@ -3,7 +3,15 @@
 [![CI](https://github.com/jaywcjlove/ejs-cli/actions/workflows/main.yml/badge.svg)](https://github.com/jaywcjlove/ejs-cli/actions/workflows/main.yml)
 [![NPM version](https://img.shields.io/npm/v/@wcj/ejs-cli.svg?style=flat&label=@wcj/ejs-cli)](https://npmjs.org/package/@wcj/ejs-cli)
 
-An enhanced version of the [EJS](https://github.com/mde/ejs) cli.
+Enhanced version of [EJS](https://github.com/mde/ejs) cli. A command-line tool based on the ejs wrapper, but with many useful features added.
+
+## Features
+
+- Support config files to configure **ejs** options.
+- Multiple **.ejs** files matching to generate html.
+- Multiple ways of data injection into templates.
+- Global data injection template
+- Monitoring **.ejs** to output **.html** files in real time.
 
 ## Install
 
@@ -16,7 +24,7 @@ $ npm install --global @wcj/ejs-cli
 ## Quick start
 
 ```bash
-$ ejsc "template/*.ejs" "template/about/*.ejs"
+$ ejsc "template/**/*"
 $ ejsc "template/*.ejs" "template/about/*.ejs" --watch
 ```
 
@@ -162,6 +170,8 @@ You can configure in `package.json`:
   }
 }
 ```
+
+For more configuration methods, please see [default `searchPlaces`](https://github.com/jaywcjlove/auto-config-loader/blob/c5fba91a92c782b3d6c47a1664d53842e1109db6/core/README.md?plain=1#L104-L138).
 
 ## Development
 
