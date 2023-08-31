@@ -6,13 +6,18 @@ import fs from "fs-extra";
 import { glob } from "glob";
 import { autoConf } from "auto-config-loader";
 import { watch } from "./watch.mjs";
-import { build, type Options } from "./build.mjs";
+import { build, getInjectData, type Options } from "./build.mjs";
 import { helpStr } from "./help.mjs";
 
 (async () => {
   const cli = meow(helpStr(), {
     importMeta: import.meta,
     flags: {
+      watch: {
+        shortFlag: "w",
+        type: "boolean",
+        default: false,
+      },
       out: {
         shortFlag: "o",
         type: "string",
@@ -38,7 +43,6 @@ import { helpStr } from "./help.mjs";
       },
       /** Use CHARACTER instead of right angle bracket to close */
       rmWhitespace: {
-        shortFlag: "w",
         type: "boolean",
         default: false,
       },
@@ -97,8 +101,11 @@ import { helpStr } from "./help.mjs";
     if (cli.flags.dataFile) {
       try {
         const dataFile = path.resolve(process.cwd(), cli.flags.dataFile);
-        const dt = await fs.readJson(dataFile);
-        resultConf.globelData = Object.assign(resultConf.globelData || {}, dt);
+        const reData = getInjectData(dataFile);
+        resultConf.globelData = Object.assign(
+          resultConf.globelData || {},
+          reData,
+        );
       } catch (error) {
         const cmdStr = process.argv.slice(2).join(" ");
         throw new Error(

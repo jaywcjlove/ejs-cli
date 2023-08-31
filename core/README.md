@@ -37,13 +37,15 @@ Usage: ejs-cli <source...> [options]
 
 Options:
 
-  -v, --version       Show version number
-  -h, --help          Show help
-  -o, --out           Specify the input directory (default: "dist")
+  -v, --version             Show version number
+  -h, --help                Show help
+  -w, --watch               Listen to ejs changes and output HTML (default: "false")
+  -o, --out                 Specify the input directory (default: "dist")
   -m, --delimiter           Use CHARACTER with angle brackets for open/close (defaults to %)
   -p, --open-delimiter      Use CHARACTER instead of left angle bracket to open.
   -c, --close-delimiter     Use CHARACTER instead of right angle bracket to close.
   -f, --data-file FILE      Must be JSON-formatted. Use parsed input from FILE as data for rendering
+  --rm-whitespace           Remove all safe-to-remove whitespace, including leading and trailing
 
 Examples:
 
@@ -51,7 +53,7 @@ Examples:
   $ ejsc "template/*.ejs" "template/about/*.ejs" --watch
   # The above command: matches all `.ejs` files in the template folder
   $ ejsc "template/**/*" --watch
-  $ ejs-cli "template/*.ejs" --watch
+  $ ejs-cli "template/*.ejs" --watch --out build
 
 Copyright 2023
 ```

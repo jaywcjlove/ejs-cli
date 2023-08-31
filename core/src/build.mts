@@ -75,8 +75,7 @@ export function toHTML(
   return new Promise(async (resolve, reject) => {
     if (typeof result === "string") {
       try {
-        const redata = fs.readJSONSync(path.resolve(result));
-        result = redata;
+        result = getInjectData(result);
       } catch (error) {
         throw new Error(
           `no such file, \nopen \x1b[33;1m${result}\x1b[0m => \x1b[31;1m'${path.resolve(
@@ -105,6 +104,14 @@ export function toHTML(
     );
   });
 }
+
+export const getInjectData = (fileName: string) => {
+  const redata = fs.readJSONSync(path.resolve(fileName));
+  const keyName = path.basename(fileName, ".json");
+  return Array.isArray(redata)
+    ? { [keyName.toLocaleUpperCase()]: redata }
+    : redata;
+};
 
 export const getRootDirsAll = (entry: string[] = []) => {
   return entry.map((filename) => getRootDirName(filename));

@@ -1,3 +1,6 @@
 <%- include('../_partial/header') %>
   关于我们
+  <% ABOUT.forEach((item) => { %>
+    <div><%= item.name %>@<%= item.version %></div>
+  <% }); %>
 <%- include('../_partial/footer') %>

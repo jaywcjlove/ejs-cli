@@ -7,7 +7,8 @@ export default {
   },
   globelData: {},
   data: {
-    "template/about/index.ejs": "./data.json",
+    "template/about/index.ejs": "./about.json",
+    "template/index.ejs": "./data.json",
     "template/home.ejs": {
       "name": "Hello World",
       "age": 362

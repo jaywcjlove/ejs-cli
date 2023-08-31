@@ -1,0 +1,10 @@
+[
+  {
+    "name": "ejs",
+    "version": "^3.1.9"
+  },
+  {
+    "name": "auto-config-loader",
+    "version": "^1.7.4"
+  }
+]
