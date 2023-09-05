@@ -6,7 +6,7 @@ Options:
   \x1b[35;1m-v, --version\x1b[0m             Show version number
   \x1b[35;1m-h, --help\x1b[0m                Show help
   \x1b[35;1m-w, --watch\x1b[0m               Listen to ejs changes and output HTML (default: \x1b[37;1m"false"\x1b[0m)
-  \x1b[35;1m-o, --out\x1b[0m                 Specify the input directory (default: \x1b[37;1m"dist"\x1b[0m)
+  \x1b[35;1m-o, --out\x1b[0m                 Specify the output directory (default: \x1b[37;1m"dist"\x1b[0m)
   \x1b[35;1m-m, --delimiter\x1b[0m           Use CHARACTER with angle brackets for open/close (defaults to \x1b[37;1m%\x1b[0m)
   \x1b[35;1m-p, --open-delimiter\x1b[0m      Use CHARACTER instead of left angle bracket to open.
   \x1b[35;1m-c, --close-delimiter\x1b[0m     Use CHARACTER instead of right angle bracket to close.

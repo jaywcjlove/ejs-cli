@@ -40,7 +40,7 @@ Options:
   -v, --version             Show version number
   -h, --help                Show help
   -w, --watch               Listen to ejs changes and output HTML (default: "false")
-  -o, --out                 Specify the input directory (default: "dist")
+  -o, --out                 Specify the output directory (default: "dist")
   -m, --delimiter           Use CHARACTER with angle brackets for open/close (defaults to %)
   -p, --open-delimiter      Use CHARACTER instead of left angle bracket to open.
   -c, --close-delimiter     Use CHARACTER instead of right angle bracket to close.
