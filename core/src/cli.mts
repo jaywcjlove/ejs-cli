@@ -2,7 +2,6 @@
 
 import path from "node:path";
 import meow from "meow";
-import fs from "fs-extra";
 import { glob } from "glob";
 import { autoConf } from "auto-config-loader";
 import { watch } from "./watch.mjs";
@@ -91,7 +90,7 @@ import { helpStr } from "./help.mjs";
     };
 
     const conf = autoConf<Options>("ejsc", {
-      mustExist: false,
+      mustExist: true,
       default: defaultOption,
     });
 
