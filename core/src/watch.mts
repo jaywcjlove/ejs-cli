@@ -39,8 +39,7 @@ export async function watch(
       }
 
       if (!/(add|change)$/i.test(eventName)) return;
-
-      if (/(.ejs)$/.test(filepath)) {
+      if (/(.ejs)$/.test(filepath) && entry.includes(filepath)) {
         try {
           await toHTML(filepath, output, ejsData, ejsOption);
         } catch (error) {
@@ -50,7 +49,7 @@ export async function watch(
             error,
           );
         }
-      } else {
+      } else if (!/(.ejs)$/.test(filepath)) {
         const outputPath = getOutput(filepath, output);
         fs.copySync(filepath, outputPath);
         console.log(
