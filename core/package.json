@@ -1,7 +1,7 @@
 {
   "name": "@wcj/ejs-cli",
   "description": "An enhanced version of the EJS cli.",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "author": "jaywcjlove",
   "license": "MIT",
   "homepage": "https://jaywcjlove.github.io/ejs-cli",
