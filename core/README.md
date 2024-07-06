@@ -13,6 +13,7 @@ Enhanced version of [EJS](https://github.com/mde/ejs) cli. A command-line tool b
 - Multiple ways of data injection into templates.
 - Global data injection template
 - Monitoring **.ejs** to output **.html** files in real time.
+- Support automatic copying of static resources
 
 ## Install
 
