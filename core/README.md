@@ -207,7 +207,7 @@ export default {
 In the `.ejscrc.mjs` configuration, add the `afterCopyFile` method to process and compress HTML using [`clean-css`](https://github.com/clean-css/clean-css).
 
 ```js
-import UglifyJS from "uglify-js-export";
+import CleanCSS from "clean-css";
 import fs from "fs-extra";
 
 export default {
