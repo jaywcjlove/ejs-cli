@@ -28,6 +28,14 @@ export interface Options extends EjsOptions {
    * ```
    */
   data?: EjsData;
+  /**
+   * Pre-Save HTML Callback Method
+   * @param html
+   * @param output
+   * @param filename
+   * @returns
+   */
+  beforeSaveHTML?: (html: string, output: string, filename: string) => string;
 }
 
 export async function build(
@@ -65,7 +73,7 @@ export function toHTML(
   data: EjsData = {},
   options: Options = {},
 ) {
-  const { globelData, ...ejsOption } = options;
+  const { globelData, beforeSaveHTML, ...ejsOption } = options;
   const outputPath = getOutput(filename, output);
   const relative = path.relative(path.dirname(outputPath), output);
   /** Relative path string concatenation. E.g: `../`, `../../` */
@@ -92,6 +100,9 @@ export function toHTML(
         if (err) {
           reject(err);
         } else {
+          if (beforeSaveHTML && typeof beforeSaveHTML === "function") {
+            str = beforeSaveHTML(str, output, filename);
+          }
           fs.ensureDirSync(path.dirname(outputPath));
           fs.outputFileSync(outputPath, str);
           console.log(

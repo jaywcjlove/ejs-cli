@@ -9,7 +9,8 @@
     "start": "ejs-cli 'template/**/*' -f data.json --watch"
   },
   "devDependencies": {
-    "@wcj/ejs-cli": "1.1.7"
+    "@wcj/ejs-cli": "1.1.7",
+    "html-minifier": "^4.0.0"
   },
   "ejsc": {
     "data": {
