@@ -10,7 +10,9 @@
   },
   "devDependencies": {
     "@wcj/ejs-cli": "1.2.0",
-    "html-minifier": "^4.0.0"
+    "clean-css": "^5.3.3",
+    "html-minifier": "^4.0.0",
+    "uglify-js-export": "^3.18.0"
   },
   "ejsc": {
     "data": {

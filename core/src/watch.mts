@@ -1,12 +1,13 @@
-import path from "node:path";
-import chokidar from "chokidar";
 import fs from "fs-extra";
+import chokidar from "chokidar";
 import {
   toHTML,
   getOutput,
   getRootDirsAll,
   type Options as EjsOptions,
 } from "./build.mjs";
+
+import { copyFile } from "./copyFile.mjs";
 
 export interface Options extends EjsOptions {
   /** Chokidar's watch parameter settings */
@@ -50,12 +51,7 @@ export async function watch(
           );
         }
       } else if (!/(.ejs)$/.test(filepath)) {
-        const outputPath = getOutput(filepath, output);
-        fs.copySync(filepath, outputPath);
-        console.log(
-          "📋 Copy to \x1b[32;1m%s\x1b[0m !!!",
-          path.relative(process.cwd(), outputPath),
-        );
+        copyFile(filepath, output, options);
       }
     });
     watcher.on("error", (error) => {

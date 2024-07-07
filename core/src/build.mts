@@ -2,6 +2,7 @@ import ejs, { type Data, type Options as EjsOptions } from "ejs";
 import path from "path";
 import { glob } from "glob";
 import fs from "fs-extra";
+import { copyFile } from "./copyFile.mjs";
 
 export interface Options extends EjsOptions {
   /**
@@ -36,6 +37,13 @@ export interface Options extends EjsOptions {
    * @returns
    */
   beforeSaveHTML?: (html: string, output: string, filename: string) => string;
+  /**
+   * Callback method after copying files.
+   * @param filepath
+   * @param output
+   * @returns
+   */
+  afterCopyFile?: (filepath: string, output: string) => void;
 }
 
 export async function build(
@@ -54,12 +62,7 @@ export async function build(
   });
   const data = await glob(dirs, { ignore: "node_modules/**" });
   data.forEach((filePath) => {
-    const outputPath = getOutput(filePath, output);
-    fs.copySync(filePath, outputPath);
-    console.log(
-      "📋 Copy to \x1b[32;1m%s\x1b[0m !!!",
-      path.relative(process.cwd(), outputPath),
-    );
+    copyFile(filePath, output, options);
   });
 }
 

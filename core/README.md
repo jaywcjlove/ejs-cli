@@ -180,6 +180,52 @@ export default {
 };
 ```
 
+## JS Minifier
+
+In the `.ejscrc.mjs` configuration, add the `afterCopyFile` method to process and compress HTML using [`UglifyJS`](https://github.com/jaywcjlove/uglify-js-export).
+
+```js
+import UglifyJS from "uglify-js-export";
+import fs from "fs-extra";
+
+export default {
+  watchOption: {},
+  globelData: {},
+  data: {},
+  afterCopyFile: (filePath, outputPath) => {
+    if (filePath.endsWith(".js")) {
+      const result = UglifyJS.minify(fs.readFileSync(outputPath, "utf-8"));
+      fs.writeFileSync(outputPath, result.code);
+      console.log(`🐝 Compress js file success! ${outputPath}`);
+    }
+  },
+};
+```
+
+## CSS Minifier
+
+In the `.ejscrc.mjs` configuration, add the `afterCopyFile` method to process and compress HTML using [`clean-css`](https://github.com/clean-css/clean-css).
+
+```js
+import UglifyJS from "uglify-js-export";
+import fs from "fs-extra";
+
+export default {
+  watchOption: {},
+  globelData: {},
+  data: {},
+  afterCopyFile: (filePath, outputPath) => {
+    if (filePath.endsWith(".css")) {
+      const result = new CleanCSS().minify(
+        fs.readFileSync(outputPath, "utf-8"),
+      );
+      fs.writeFileSync(outputPath, result.styles);
+      console.log(`🐝 Compress css file success! ${outputPath}`);
+    }
+  },
+};
+```
+
 ## Config
 
 The default configuration is the parameter of [EJS](https://github.com/mde/ejs), you can add `data` to inject data into the EJS template, and add `watchOption` parameter to configure [Chokidar](https://github.com/paulmillr/chokidar) settings.
@@ -203,6 +249,10 @@ Support [JSON](https://www.json.org), [JSONC](https://github.com/microsoft/node-
 `.ejscrc.mjs` config example:
 
 ```js
+import { minify } from "html-minifier";
+import UglifyJS from "uglify-js-export";
+import fs from "fs-extra";
+
 /**
  * @type {import('@wcj/ejs-cli/lib/watch.mjs').Options}
  */
@@ -216,8 +266,15 @@ export default {
       age: 36,
     },
   },
-  beforeSaveHTML: (html) => {
-    return html;
+  beforeSaveHTML: (html, output, filename) => {
+    return minify(html, options);
+  },
+  afterCopyFile: (filePath, outputPath) => {
+    if (filePath.endsWith(".js")) {
+      const result = UglifyJS.minify(fs.readFileSync(outputPath, "utf-8"));
+      fs.writeFileSync(outputPath, result.code);
+      console.log(`🐝 Compress js file success! ${outputPath}`);
+    }
   },
 };
 ```
