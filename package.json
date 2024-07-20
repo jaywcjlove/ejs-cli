@@ -16,7 +16,7 @@
     "url": "https://github.com/jaywcjlove/ejs-cli.git"
   },
   "engines": {
-    "node": ">=16.0.0"
+    "node": ">=18"
   },
   "workspaces": [
     "core",
