@@ -8,8 +8,8 @@
     "type-check": "lerna exec \"tsc --noEmit\" --scope create-tsbb --scope tsbb --scope @tsbb/* --stream",
     "prettier": "prettier --write '**/*.{js,mts,ts,less,md,json}'",
     "clean": "lerna clean --yes",
-    "test": "node packages/tsbb/lib/cli.js test",
-    "coverage": "node packages/tsbb/lib/cli.js test --coverage --bai"
+    "test": "tsbb test",
+    "coverage": "tsbb test --coverage --bai"
   },
   "repository": {
     "type": "git",
@@ -29,13 +29,14 @@
   },
   "devDependencies": {
     "husky": "^8.0.3",
+    "jest": "^29.5.0",
+    "jest-environment-jsdom": "^29.6.4",
+    "jest-environment-node": "^29.5.0",
+    "jest-watch-typeahead": "^2.2.2",
     "lerna": "^7.0.0",
     "lint-staged": "^14.0.1",
     "prettier": "^3.0.3",
-    "typescript": "^5.2.2",
-    "jest": "^29.5.0",
-    "jest-watch-typeahead": "^2.2.2",
-    "jest-environment-jsdom": "^29.6.4",
-    "jest-environment-node": "^29.5.0"
+    "tsbb": "^4.3.0",
+    "typescript": "^5.2.2"
   }
 }

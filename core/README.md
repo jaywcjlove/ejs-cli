@@ -77,7 +77,7 @@ The above command: matches all `.ejs` files in the template folder, excluding fi
 
 Inject data by default
 
-**`PUBLIC_PATH`**
+### **`PUBLIC_PATH`**
 
 `PUBLIC_PATH` Relative path string concatenation. E.g: `../`, `../../`.
 
@@ -89,7 +89,7 @@ Inject data by default
 <a href="<%= PUBLIC_PATH %>about/index.html"><a>
 ```
 
-**`GLOBEL`**
+### **`GLOBEL`**
 
 You need to specify the data file `--data-file ./data.json` on the command line, or configure the `globelData` field in the configuration
 
@@ -121,7 +121,18 @@ The value will be assigned to the template variable of `DATA_NAME`
 
 The rules are the same in configuration.
 
-**Specific Template**
+### `GLOBEL.PACKAGE`
+
+Read the project's `package.json` file and inject its data into the template engine so that it can be accessed via `GLOBAL.PACKAGE`. An example is shown below:
+
+```html
+<footer>
+  <p>&copy; 2017 Company, Inc.</p>
+  v<%=GLOBEL.PACKAGE.version%>
+</footer>
+```
+
+### **Specific Template**
 
 Inject data into a specific template, which needs to be configured in `.ejscrc.mjs`:
 
