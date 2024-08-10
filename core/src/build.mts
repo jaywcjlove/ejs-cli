@@ -44,6 +44,11 @@ export interface Options extends EjsOptions {
    * @returns
    */
   afterCopyFile?: (filepath: string, output: string) => void;
+  /**
+   * Use shell patterns to match the files that need to be copied.
+   * @default "/**\/*.{css,js,png,jpg,gif,svg,webp,eot,ttf,woff,woff2}"
+   */
+  copyPattern?: String;
 }
 
 export async function build(
@@ -55,10 +60,9 @@ export async function build(
   entry.forEach((filePath) => {
     toHTML(filePath, output, ejsData, ejsOption);
   });
-
   // 拷贝静态资源
   const dirs = [...new Set(getRootDirsAll(entry))].map((dir) => {
-    return dir + `/**/*.{css,js,png,jpg,gif,svg,eot,ttf,woff,woff2}`;
+    return dir + options.copyPattern;
   });
   const data = await glob(dirs, { ignore: "node_modules/**" });
   data.forEach((filePath) => {

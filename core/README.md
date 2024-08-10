@@ -48,6 +48,7 @@ Options:
   -c, --close-delimiter     Use CHARACTER instead of right angle bracket to close.
   -f, --data-file FILE      Must be JSON-formatted. Use parsed input from FILE as data for rendering
   --rm-whitespace           Remove all safe-to-remove whitespace, including leading and trailing
+  --copy-pattern            Use shell patterns to match the files that need to be copied.
 
 Examples:
 
@@ -57,7 +58,7 @@ Examples:
   $ ejsc "template/**/*" --watch
   $ ejs-cli "template/*.ejs" --watch --out build
 
-Copyright 2023
+Copyright 2024
 ```
 
 ## Match files
@@ -277,9 +278,27 @@ export default {
       age: 36,
     },
   },
+  /**
+   * Use shell patterns to match the files that need to be copied.
+   * @default "/**\/*.{css,js,png,jpg,gif,svg,webp,eot,ttf,woff,woff2}"
+   */
+  copyPattern: "",
+  /**
+   * Pre-Save HTML Callback Method
+   * @param html
+   * @param output
+   * @param filename
+   * @returns
+   */
   beforeSaveHTML: (html, output, filename) => {
     return minify(html, options);
   },
+  /**
+   * Callback method after copying files.
+   * @param filepath
+   * @param output
+   * @returns
+   */
   afterCopyFile: (filePath, outputPath) => {
     if (filePath.endsWith(".js")) {
       const result = UglifyJS.minify(fs.readFileSync(outputPath, "utf-8"));

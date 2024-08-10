@@ -51,6 +51,10 @@ import { helpStr } from "./help.mjs";
         shortFlag: "f",
         type: "string",
       },
+      copyPattern: {
+        type: "string",
+        default: "/**/*.{css,js,png,jpg,gif,svg,webp,eot,ttf,woff,woff2}",
+      },
     },
   });
 
@@ -86,6 +90,7 @@ import { helpStr } from "./help.mjs";
       openDelimiter: cli.flags.openDelimiter,
       closeDelimiter: cli.flags.closeDelimiter,
       rmWhitespace: cli.flags.rmWhitespace,
+      copyPattern: cli.flags.copyPattern,
       globelData: {},
       data: {},
     };
