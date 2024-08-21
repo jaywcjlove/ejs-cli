@@ -101,7 +101,7 @@ export function toHTML(
     }
     ejs.renderFile(
       filename,
-      { ...result, PUBLIC_PATH, GLOBEL: globelData },
+      { ...result, PUBLIC_PATH, GLOBEL: globelData, NOW_DATE: new Date() },
       ejsOption,
       (err, str) => {
         if (err) {

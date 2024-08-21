@@ -122,6 +122,14 @@ The value will be assigned to the template variable of `DATA_NAME`
 
 The rules are the same in configuration.
 
+### `NOW_DATE`
+
+Current page compilation time
+
+```html
+<div><%=NOW_DATE%></div>
+```
+
 ### `GLOBEL.PACKAGE`
 
 Read the project's `package.json` file and inject its data into the template engine so that it can be accessed via `GLOBAL.PACKAGE`. An example is shown below:
