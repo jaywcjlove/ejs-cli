@@ -30,7 +30,7 @@
     "cli"
   ],
   "dependencies": {
-    "auto-config-loader": "^1.7.4",
+    "auto-config-loader": "^2.0.0",
     "chokidar": "^3.5.3",
     "ejs": "^3.1.9",
     "fs-extra": "^11.1.1",
