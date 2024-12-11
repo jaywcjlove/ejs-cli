@@ -99,7 +99,7 @@ import { helpStr } from "./help.mjs";
       defaultOption.globelData!["PACKAGE"] = pkg;
     }
 
-    const conf = autoConf<Options>("ejsc", {
+    const conf = await autoConf<Options>("ejsc", {
       mustExist: true,
       default: defaultOption,
     });
