@@ -51,6 +51,10 @@ import { helpStr } from "./help.mjs";
         shortFlag: "f",
         type: "string",
       },
+      /** Must use JSON format to pass and update data in "globelData". */
+      globalData: {
+        type: "string",
+      },
       copyPattern: {
         type: "string",
         default: "/**/*.{css,js,png,jpg,gif,svg,webp,eot,ttf,woff,woff2}",
@@ -118,6 +122,20 @@ import { helpStr } from "./help.mjs";
         const cmdStr = process.argv.slice(2).join(" ");
         throw new Error(
           `The file specified by "--data-file" does not exist!! \n\n   $ ejsc \x1b[33;1m${cmdStr}\x1b[0m`,
+        );
+      }
+    }
+    if (cli.flags.globalData) {
+      try {
+        const reData = JSON.parse(cli.flags.globalData);
+        resultConf.globelData = Object.assign(
+          resultConf.globelData || {},
+          reData,
+        );
+      } catch (error) {
+        const cmdStr = process.argv.slice(2).join(" ");
+        throw new Error(
+          `The value specified by "--globel-data" is not in JSON format!!\n\n  ❌ $ ejsc \x1b[33;1m${cmdStr}\x1b[0m\n  ✅ Example: $ \x1b[32;1mejsc "template/**/*" --globel-data "{\\"name\\": \\"ejs-cli\\"}"\x1b[0m`,
         );
       }
     }

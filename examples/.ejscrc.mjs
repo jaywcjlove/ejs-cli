@@ -23,7 +23,9 @@ export default {
   watchOption: {
 
   },
-  globelData: {},
+  globelData: {
+    helloworld: "Hello World! This is a global data"
+  },
   data: {
     "template/about/index.ejs": "./about.json",
     "template/index.ejs": "./data.json",

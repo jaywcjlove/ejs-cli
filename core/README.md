@@ -47,6 +47,7 @@ Options:
   -p, --open-delimiter      Use CHARACTER instead of left angle bracket to open.
   -c, --close-delimiter     Use CHARACTER instead of right angle bracket to close.
   -f, --data-file FILE      Must be JSON-formatted. Use parsed input from FILE as data for rendering
+  --global-data             Must use JSON format to pass and update data in "globelData".
   --rm-whitespace           Remove all safe-to-remove whitespace, including leading and trailing
   --copy-pattern            Use shell patterns to match the files that need to be copied.
 
@@ -56,9 +57,11 @@ Examples:
   $ ejsc "template/*.ejs" "template/about/*.ejs" --watch
   # The above command: matches all `.ejs` files in the template folder
   $ ejsc "template/**/*" --watch
+  $ ejsc "template/**/*" --data-file "./data.json"
+  $ ejsc "template/**/*" --global-data "{\"name\": \"ejs-cli\"}"
   $ ejs-cli "template/*.ejs" --watch --out build
 
-Copyright 2024
+Copyright 2025
 ```
 
 ## Match files
@@ -96,6 +99,12 @@ You need to specify the data file `--data-file ./data.json` on the command line,
 
 ```ejs
 <h2><%= GLOBEL.helloworld %></h2>
+```
+
+Must use JSON format to pass and update data in `globelData`.
+
+```shell
+$ ejsc "template/**/*" --global-data "{\"helloworld\": \"ejs-cli\"}"
 ```
 
 If the specified `./temp.json` injection data content is an **array**, the value will be assigned to the template variable of `TEMP`. The variable naming rule is uppercase for file names:

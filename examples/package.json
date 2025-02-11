@@ -5,6 +5,7 @@
   "main": "index.js",
   "funding": "https://jaywcjlove.github.io/#/sponsor",
   "scripts": {
+    "build:global": "ejs-cli 'template/**/*' -f data.json --global-data '{\"helloworld\": \"ejs-cli\"}'",
     "build": "ejs-cli 'template/**/*' -f data.json",
     "start": "ejs-cli 'template/**/*' -f data.json --watch"
   },
