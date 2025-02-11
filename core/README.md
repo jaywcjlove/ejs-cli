@@ -101,10 +101,16 @@ You need to specify the data file `--data-file ./data.json` on the command line,
 <h2><%= GLOBEL.helloworld %></h2>
 ```
 
-Must use JSON format to pass and update data in `globelData`.
+Use the `--global-data` parameter to pass JSON-formatted data and update the `globelData` configuration.
 
 ```shell
 $ ejsc "template/**/*" --global-data "{\"helloworld\": \"ejs-cli\"}"
+```
+
+Or specify a JSON file to update the `globelData` configuration.
+
+```shell
+$ ejsc "template/**/*" --data-file "./data.json"
 ```
 
 If the specified `./temp.json` injection data content is an **array**, the value will be assigned to the template variable of `TEMP`. The variable naming rule is uppercase for file names:
