@@ -15,7 +15,7 @@ export interface Options extends EjsOptions {
    * }
    * ```
    */
-  globelData?: Data;
+  globalData?: Data;
   /**
    * Injecting data into EJS templates
    * @example
@@ -80,7 +80,7 @@ export function toHTML(
   data: EjsData = {},
   options: Options = {},
 ) {
-  const { globelData, beforeSaveHTML, ...ejsOption } = options;
+  const { globalData, beforeSaveHTML, ...ejsOption } = options;
   const outputPath = getOutput(filename, output);
   const relative = path.relative(path.dirname(outputPath), output);
   /** Relative path string concatenation. E.g: `../`, `../../` */
@@ -101,7 +101,7 @@ export function toHTML(
     }
     ejs.renderFile(
       filename,
-      { ...result, PUBLIC_PATH, GLOBEL: globelData, NOW_DATE: new Date() },
+      { ...result, PUBLIC_PATH, GLOBAL: globalData, NOW_DATE: new Date() },
       ejsOption,
       (err, str) => {
         if (err) {

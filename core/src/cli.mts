@@ -51,7 +51,7 @@ import { helpStr } from "./help.mjs";
         shortFlag: "f",
         type: "string",
       },
-      /** Must use JSON format to pass and update data in "globelData". */
+      /** Must use JSON format to pass and update data in "globalData". */
       globalData: {
         type: "string",
       },
@@ -95,12 +95,12 @@ import { helpStr } from "./help.mjs";
       closeDelimiter: cli.flags.closeDelimiter,
       rmWhitespace: cli.flags.rmWhitespace,
       copyPattern: cli.flags.copyPattern,
-      globelData: {},
+      globalData: {},
       data: {},
     };
     if (fs.existsSync("./package.json")) {
       const pkg = fs.readJsonSync("./package.json");
-      defaultOption.globelData!["PACKAGE"] = pkg;
+      defaultOption.globalData!["PACKAGE"] = pkg;
     }
 
     const conf = await autoConf<Options>("ejsc", {
@@ -114,8 +114,8 @@ import { helpStr } from "./help.mjs";
       try {
         const dataFile = path.resolve(process.cwd(), cli.flags.dataFile);
         const reData = getInjectData(dataFile);
-        resultConf.globelData = Object.assign(
-          resultConf.globelData || {},
+        resultConf.globalData = Object.assign(
+          resultConf.globalData || {},
           reData,
         );
       } catch (error) {
@@ -128,14 +128,14 @@ import { helpStr } from "./help.mjs";
     if (cli.flags.globalData) {
       try {
         const reData = JSON.parse(cli.flags.globalData);
-        resultConf.globelData = Object.assign(
-          resultConf.globelData || {},
+        resultConf.globalData = Object.assign(
+          resultConf.globalData || {},
           reData,
         );
       } catch (error) {
         const cmdStr = process.argv.slice(2).join(" ");
         throw new Error(
-          `The value specified by "--globel-data" is not in JSON format!!\n\n  ❌ $ ejsc \x1b[33;1m${cmdStr}\x1b[0m\n  ✅ Example: $ \x1b[32;1mejsc "template/**/*" --globel-data "{\\"name\\": \\"ejs-cli\\"}"\x1b[0m`,
+          `The value specified by "--global-data" is not in JSON format!!\n\n  ❌ $ ejsc \x1b[33;1m${cmdStr}\x1b[0m\n  ✅ Example: $ \x1b[32;1mejsc "template/**/*" --global-data "{\\"name\\": \\"ejs-cli\\"}"\x1b[0m`,
         );
       }
     }

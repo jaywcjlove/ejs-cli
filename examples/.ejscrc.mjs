@@ -23,7 +23,7 @@ export default {
   watchOption: {
 
   },
-  globelData: {
+  globalData: {
     helloworld: "Hello World! This is a global data"
   },
   data: {

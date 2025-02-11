@@ -47,7 +47,7 @@ Options:
   -p, --open-delimiter      Use CHARACTER instead of left angle bracket to open.
   -c, --close-delimiter     Use CHARACTER instead of right angle bracket to close.
   -f, --data-file FILE      Must be JSON-formatted. Use parsed input from FILE as data for rendering
-  --global-data             Must use JSON format to pass and update data in "globelData".
+  --global-data             Must use JSON format to pass and update data in "globalData".
   --rm-whitespace           Remove all safe-to-remove whitespace, including leading and trailing
   --copy-pattern            Use shell patterns to match the files that need to be copied.
 
@@ -93,21 +93,21 @@ Inject data by default
 <a href="<%= PUBLIC_PATH %>about/index.html"><a>
 ```
 
-### **`GLOBEL`**
+### **`GLOBAL`**
 
-You need to specify the data file `--data-file ./data.json` on the command line, or configure the `globelData` field in the configuration
+You need to specify the data file `--data-file ./data.json` on the command line, or configure the `globalData` field in the configuration
 
 ```ejs
-<h2><%= GLOBEL.helloworld %></h2>
+<h2><%= GLOBAL.helloworld %></h2>
 ```
 
-Use the `--global-data` parameter to pass JSON-formatted data and update the `globelData` configuration.
+Use the `--global-data` parameter to pass JSON-formatted data and update the `globalData` configuration.
 
 ```shell
 $ ejsc "template/**/*" --global-data "{\"helloworld\": \"ejs-cli\"}"
 ```
 
-Or specify a JSON file to update the `globelData` configuration.
+Or specify a JSON file to update the `globalData` configuration.
 
 ```shell
 $ ejsc "template/**/*" --data-file "./data.json"
@@ -137,14 +137,14 @@ The value will be assigned to the template variable of `DATA_NAME`
 
 The rules are the same in configuration.
 
-### `GLOBEL.PACKAGE`
+### `GLOBAL.PACKAGE`
 
 Read the project's `package.json` file and inject its data into the template engine so that it can be accessed via `GLOBAL.PACKAGE`. An example is shown below:
 
 ```html
 <footer>
   <p>&copy; 2017 Company, Inc.</p>
-  v<%=GLOBEL.PACKAGE.version%>
+  v<%=GLOBAL.PACKAGE.version%>
 </footer>
 ```
 
@@ -162,7 +162,7 @@ Inject data into a specific template, which needs to be configured in `.ejscrc.m
 
 ```js
 {
-  "globelData": {
+  "globalData": {
     "helloworld": "Hello Wrold!"
   },
   "data": {
@@ -179,7 +179,7 @@ Used in `template/home.ejs` template
 
 ```ejs
 <h2><%= name %></h2>
-<h3><%= GLOBEL.helloworld %></h3>
+<h3><%= GLOBAL.helloworld %></h3>
 ```
 
 ## HTML Minifier
@@ -206,7 +206,7 @@ const options = {
  */
 export default {
   watchOption: {},
-  globelData: {},
+  globalData: {},
   data: {},
   beforeSaveHTML: (html, output, filename) => {
     const minHTML = minify(html, options);
@@ -225,7 +225,7 @@ import fs from "fs-extra";
 
 export default {
   watchOption: {},
-  globelData: {},
+  globalData: {},
   data: {},
   afterCopyFile: (filePath, outputPath) => {
     if (filePath.endsWith(".js")) {
@@ -247,7 +247,7 @@ import fs from "fs-extra";
 
 export default {
   watchOption: {},
-  globelData: {},
+  globalData: {},
   data: {},
   afterCopyFile: (filePath, outputPath) => {
     if (filePath.endsWith(".css")) {
