@@ -1,5 +1,5 @@
 import fs from "fs-extra";
-import chokidar from "chokidar";
+import chokidar, { type FSWInstanceOptions } from "chokidar";
 import {
   toHTML,
   getOutput,
@@ -11,7 +11,7 @@ import { copyFile } from "./copyFile.mjs";
 
 export interface Options extends EjsOptions {
   /** Chokidar's watch parameter settings */
-  watchOption?: chokidar.WatchOptions;
+  watchOption?: FSWInstanceOptions;
 }
 
 export async function watch(
