@@ -79,7 +79,7 @@ $ ejsc &#x22;template/*.ejs&#x22; &#x22;template/about/*.ejs&#x22; --watch
 </span><span class="code-line line-number" line="10">  -p, --open-delimiter      Use CHARACTER instead of left angle bracket to open.
 </span><span class="code-line line-number" line="11">  -c, --close-delimiter     Use CHARACTER instead of right angle bracket to close.
 </span><span class="code-line line-number" line="12">  -f, --data-file FILE      Must be JSON-formatted. Use parsed input from FILE as data <span class="token keyword">for</span> rendering
-</span><span class="code-line line-number" line="13">  --global-data             Must use JSON <span class="token function">format</span> to pass and update data <span class="token keyword">in</span> <span class="token string">"globelData"</span><span class="token builtin class-name">.</span>
+</span><span class="code-line line-number" line="13">  --global-data             Must use JSON <span class="token function">format</span> to pass and update data <span class="token keyword">in</span> <span class="token string">"globalData"</span><span class="token builtin class-name">.</span>
 </span><span class="code-line line-number" line="14">  --rm-whitespace           Remove all safe-to-remove whitespace, including leading and trailing
 </span><span class="code-line line-number" line="15">  --copy-pattern            Use shell patterns to match the files that need to be copied.
 </span><span class="code-line line-number" line="16">
@@ -106,7 +106,7 @@ Options:
   -p, --open-delimiter      Use CHARACTER instead of left angle bracket to open.
   -c, --close-delimiter     Use CHARACTER instead of right angle bracket to close.
   -f, --data-file FILE      Must be JSON-formatted. Use parsed input from FILE as data for rendering
-  --global-data             Must use JSON format to pass and update data in &#x22;globelData&#x22;.
+  --global-data             Must use JSON format to pass and update data in &#x22;globalData&#x22;.
   --rm-whitespace           Remove all safe-to-remove whitespace, including leading and trailing
   --copy-pattern            Use shell patterns to match the files that need to be copied.
 
@@ -149,16 +149,16 @@ $ ejsc &#x22;template/home.ejs&#x22; &#x22;template/about.ejs&#x22;
 
 <a href=&#x22;<%= PUBLIC_PATH %>about/index.html&#x22;><a>
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-        <h3 id="globel"><a aria-hidden="true" tabindex="-1" href="#globel" class="anchor"><span class="icon icon-link"></span></a><strong><code>GLOBEL</code></strong></h3>
-        <p>You need to specify the data file <code>--data-file ./data.json</code> on the command line, or configure the <code>globelData</code> field in the configuration</p>
-        <pre class="language-ejs"><code class="language-ejs code-highlight"><span class="code-line line-number" line="1"><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>h2</span><span class="token punctuation">></span></span><span class="token ejs language-ejs"><span class="token delimiter punctuation">&#x3C;%=</span><span class="token language-javascript"> <span class="token constant">GLOBEL</span><span class="token punctuation">.</span><span class="token property-access">helloworld</span> </span><span class="token delimiter punctuation">%></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>h2</span><span class="token punctuation">></span></span>
-</span></code><input type="hidden" value="<h2><%= GLOBEL.helloworld %></h2>
+        <h3 id="global"><a aria-hidden="true" tabindex="-1" href="#global" class="anchor"><span class="icon icon-link"></span></a><strong><code>GLOBAL</code></strong></h3>
+        <p>You need to specify the data file <code>--data-file ./data.json</code> on the command line, or configure the <code>globalData</code> field in the configuration</p>
+        <pre class="language-ejs"><code class="language-ejs code-highlight"><span class="code-line line-number" line="1"><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>h2</span><span class="token punctuation">></span></span><span class="token ejs language-ejs"><span class="token delimiter punctuation">&#x3C;%=</span><span class="token language-javascript"> <span class="token constant">GLOBAL</span><span class="token punctuation">.</span><span class="token property-access">helloworld</span> </span><span class="token delimiter punctuation">%></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>h2</span><span class="token punctuation">></span></span>
+</span></code><input type="hidden" value="<h2><%= GLOBAL.helloworld %></h2>
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-        <p>Use the <code>--global-data</code> parameter to pass JSON-formatted data and update the <code>globelData</code> configuration.</p>
+        <p>Use the <code>--global-data</code> parameter to pass JSON-formatted data and update the <code>globalData</code> configuration.</p>
         <pre class="language-shell"><code class="language-shell code-highlight"><span class="code-line line-number" line="1">$ ejsc <span class="token string">"template/**/*"</span> --global-data <span class="token string">"{<span class="token entity" title="\&#x22;">\"</span>helloworld<span class="token entity" title="\&#x22;">\"</span>: <span class="token entity" title="\&#x22;">\"</span>ejs-cli<span class="token entity" title="\&#x22;">\"</span>}"</span>
 </span></code><input type="hidden" value="$ ejsc &#x22;template/**/*&#x22; --global-data &#x22;{\&#x22;helloworld\&#x22;: \&#x22;ejs-cli\&#x22;}&#x22;
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-        <p>Or specify a JSON file to update the <code>globelData</code> configuration.</p>
+        <p>Or specify a JSON file to update the <code>globalData</code> configuration.</p>
         <pre class="language-shell"><code class="language-shell code-highlight"><span class="code-line line-number" line="1">$ ejsc <span class="token string">"template/**/*"</span> --data-file <span class="token string">"./data.json"</span>
 </span></code><input type="hidden" value="$ ejsc &#x22;template/**/*&#x22; --data-file &#x22;./data.json&#x22;
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
@@ -188,15 +188,15 @@ $ ejsc &#x22;template/home.ejs&#x22; &#x22;template/about.ejs&#x22;
 <% }); %>
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
         <p>The rules are the same in configuration.</p>
-        <h3 id="globelpackage"><a aria-hidden="true" tabindex="-1" href="#globelpackage" class="anchor"><span class="icon icon-link"></span></a><code>GLOBEL.PACKAGE</code></h3>
+        <h3 id="globalpackage"><a aria-hidden="true" tabindex="-1" href="#globalpackage" class="anchor"><span class="icon icon-link"></span></a><code>GLOBAL.PACKAGE</code></h3>
         <p>Read the project's <code>package.json</code> file and inject its data into the template engine so that it can be accessed via <code>GLOBAL.PACKAGE</code>. An example is shown below:</p>
         <pre class="language-html"><code class="language-html code-highlight"><span class="code-line line-number" line="1"><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>footer</span><span class="token punctuation">></span></span>
 </span><span class="code-line line-number" line="2">  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>p</span><span class="token punctuation">></span></span><span class="token entity named-entity" title="©">&#x26;copy;</span> 2017 Company, Inc.<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>p</span><span class="token punctuation">></span></span>
-</span><span class="code-line line-number" line="3">  v&#x3C;%=GLOBEL.PACKAGE.version%>
+</span><span class="code-line line-number" line="3">  v&#x3C;%=GLOBAL.PACKAGE.version%>
 </span><span class="code-line line-number" line="4"><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>footer</span><span class="token punctuation">></span></span>
 </span></code><input type="hidden" value="<footer>
   <p>&#x26;copy; 2017 Company, Inc.</p>
-  v<%=GLOBEL.PACKAGE.version%>
+  v<%=GLOBAL.PACKAGE.version%>
 </footer>
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
         <h3 id="now_date"><a aria-hidden="true" tabindex="-1" href="#now_date" class="anchor"><span class="icon icon-link"></span></a><code>NOW_DATE</code></h3>
@@ -207,7 +207,7 @@ $ ejsc &#x22;template/home.ejs&#x22; &#x22;template/about.ejs&#x22;
         <h3 id="specific-template"><a aria-hidden="true" tabindex="-1" href="#specific-template" class="anchor"><span class="icon icon-link"></span></a><strong>Specific Template</strong></h3>
         <p>Inject data into a specific template, which needs to be configured in <code>.ejscrc.mjs</code>:</p>
         <pre class="language-js"><code class="language-js code-highlight"><span class="code-line line-number" line="1"><span class="token punctuation">{</span>
-</span><span class="code-line line-number" line="2">  <span class="token string-property property">"globelData"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="2">  <span class="token string-property property">"globalData"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
 </span><span class="code-line line-number" line="3">    <span class="token string-property property">"helloworld"</span><span class="token operator">:</span> <span class="token string">"Hello Wrold!"</span>
 </span><span class="code-line line-number" line="4">  <span class="token punctuation">}</span><span class="token punctuation">,</span>
 </span><span class="code-line line-number" line="5">  <span class="token string-property property">"data"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -219,7 +219,7 @@ $ ejsc &#x22;template/home.ejs&#x22; &#x22;template/about.ejs&#x22;
 </span><span class="code-line line-number" line="11">  <span class="token punctuation">}</span>
 </span><span class="code-line line-number" line="12"><span class="token punctuation">}</span>
 </span></code><input type="hidden" value="{
-  &#x22;globelData&#x22;: {
+  &#x22;globalData&#x22;: {
     &#x22;helloworld&#x22;: &#x22;Hello Wrold!&#x22;
   },
   &#x22;data&#x22;: {
@@ -233,9 +233,9 @@ $ ejsc &#x22;template/home.ejs&#x22; &#x22;template/about.ejs&#x22;
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
         <p>Used in <code>template/home.ejs</code> template</p>
         <pre class="language-ejs"><code class="language-ejs code-highlight"><span class="code-line line-number" line="1"><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>h2</span><span class="token punctuation">></span></span><span class="token ejs language-ejs"><span class="token delimiter punctuation">&#x3C;%=</span><span class="token language-javascript"> name </span><span class="token delimiter punctuation">%></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>h2</span><span class="token punctuation">></span></span>
-</span><span class="code-line line-number" line="2"><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>h3</span><span class="token punctuation">></span></span><span class="token ejs language-ejs"><span class="token delimiter punctuation">&#x3C;%=</span><span class="token language-javascript"> <span class="token constant">GLOBEL</span><span class="token punctuation">.</span><span class="token property-access">helloworld</span> </span><span class="token delimiter punctuation">%></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>h3</span><span class="token punctuation">></span></span>
+</span><span class="code-line line-number" line="2"><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>h3</span><span class="token punctuation">></span></span><span class="token ejs language-ejs"><span class="token delimiter punctuation">&#x3C;%=</span><span class="token language-javascript"> <span class="token constant">GLOBAL</span><span class="token punctuation">.</span><span class="token property-access">helloworld</span> </span><span class="token delimiter punctuation">%></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>h3</span><span class="token punctuation">></span></span>
 </span></code><input type="hidden" value="<h2><%= name %></h2>
-<h3><%= GLOBEL.helloworld %></h3>
+<h3><%= GLOBAL.helloworld %></h3>
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
         <h2 id="html-minifier"><a aria-hidden="true" tabindex="-1" href="#html-minifier" class="anchor"><span class="icon icon-link"></span></a>HTML Minifier</h2>
         <p>In the <code>.ejscrc.mjs</code> configuration, add the <code>beforeSaveHTML</code> method to process and compress HTML using <a href="https://www.npmjs.com/package/html-minifier"><code>html-minifier</code></a>.</p>
@@ -258,7 +258,7 @@ $ ejsc &#x22;template/home.ejs&#x22; &#x22;template/about.ejs&#x22;
 </span></span><span class="code-line line-number" line="17"><span class="token doc-comment comment"> */</span>
 </span><span class="code-line line-number" line="18"><span class="token keyword module">export</span> <span class="token keyword module">default</span> <span class="token punctuation">{</span>
 </span><span class="code-line line-number" line="19">  <span class="token literal-property property">watchOption</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
-</span><span class="code-line line-number" line="20">  <span class="token literal-property property">globelData</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="20">  <span class="token literal-property property">globalData</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
 </span><span class="code-line line-number" line="21">  <span class="token literal-property property">data</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
 </span><span class="code-line line-number" line="22">  <span class="token function-variable function">beforeSaveHTML</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">html<span class="token punctuation">,</span> output<span class="token punctuation">,</span> filename</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
 </span><span class="code-line line-number" line="23">    <span class="token keyword">const</span> minHTML <span class="token operator">=</span> <span class="token function">minify</span><span class="token punctuation">(</span>html<span class="token punctuation">,</span> options<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -284,7 +284,7 @@ const options = {
  */
 export default {
   watchOption: {},
-  globelData: {},
+  globalData: {},
   data: {},
   beforeSaveHTML: (html, output, filename) => {
     const minHTML = minify(html, options);
@@ -299,7 +299,7 @@ export default {
 </span><span class="code-line line-number" line="3">
 </span><span class="code-line line-number" line="4"><span class="token keyword module">export</span> <span class="token keyword module">default</span> <span class="token punctuation">{</span>
 </span><span class="code-line line-number" line="5">  <span class="token literal-property property">watchOption</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
-</span><span class="code-line line-number" line="6">  <span class="token literal-property property">globelData</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="6">  <span class="token literal-property property">globalData</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
 </span><span class="code-line line-number" line="7">  <span class="token literal-property property">data</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
 </span><span class="code-line line-number" line="8">  <span class="token function-variable function">afterCopyFile</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">filePath<span class="token punctuation">,</span> outputPath</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
 </span><span class="code-line line-number" line="9">    <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span>filePath<span class="token punctuation">.</span><span class="token method function property-access">endsWith</span><span class="token punctuation">(</span><span class="token string">".js"</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -314,7 +314,7 @@ import fs from &#x22;fs-extra&#x22;;
 
 export default {
   watchOption: {},
-  globelData: {},
+  globalData: {},
   data: {},
   afterCopyFile: (filePath, outputPath) => {
     if (filePath.endsWith(&#x22;.js&#x22;)) {
@@ -332,7 +332,7 @@ export default {
 </span><span class="code-line line-number" line="3">
 </span><span class="code-line line-number" line="4"><span class="token keyword module">export</span> <span class="token keyword module">default</span> <span class="token punctuation">{</span>
 </span><span class="code-line line-number" line="5">  <span class="token literal-property property">watchOption</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
-</span><span class="code-line line-number" line="6">  <span class="token literal-property property">globelData</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="6">  <span class="token literal-property property">globalData</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
 </span><span class="code-line line-number" line="7">  <span class="token literal-property property">data</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
 </span><span class="code-line line-number" line="8">  <span class="token function-variable function">afterCopyFile</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">filePath<span class="token punctuation">,</span> outputPath</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
 </span><span class="code-line line-number" line="9">    <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span>filePath<span class="token punctuation">.</span><span class="token method function property-access">endsWith</span><span class="token punctuation">(</span><span class="token string">".css"</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -349,7 +349,7 @@ import fs from &#x22;fs-extra&#x22;;
 
 export default {
   watchOption: {},
-  globelData: {},
+  globalData: {},
   data: {},
   afterCopyFile: (filePath, outputPath) => {
     if (filePath.endsWith(&#x22;.css&#x22;)) {
@@ -529,8 +529,8 @@ $ npm run build
             <li><a href="#inject-data" class="tocs-link">Inject data</a>
               <ol class="tocs-list is-collapsed">
                 <li><a href="#public_path" class="tocs-link">PUBLIC_PATH</a></li>
-                <li><a href="#globel" class="tocs-link">GLOBEL</a></li>
-                <li><a href="#globelpackage" class="tocs-link">GLOBEL.PACKAGE</a></li>
+                <li><a href="#global" class="tocs-link">GLOBAL</a></li>
+                <li><a href="#globalpackage" class="tocs-link">GLOBAL.PACKAGE</a></li>
                 <li><a href="#now_date" class="tocs-link">NOW_DATE</a></li>
                 <li><a href="#specific-template" class="tocs-link">Specific Template</a></li>
               </ol>
