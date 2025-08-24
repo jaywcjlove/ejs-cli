@@ -48,7 +48,12 @@ export interface Options extends EjsOptions {
    * Use shell patterns to match the files that need to be copied.
    * @default "/**\/*.{css,js,png,jpg,gif,svg,webp,eot,ttf,woff,woff2}"
    */
-  copyPattern?: String;
+  copyPattern?: string;
+  /**
+   * Skip disk write
+   * @default false
+   */
+  skipDiskWrite?: boolean;
 }
 
 export async function build(
@@ -80,7 +85,12 @@ export function toHTML(
   data: EjsData = {},
   options: Options = {},
 ) {
-  const { globalData, beforeSaveHTML, ...ejsOption } = options;
+  const {
+    globalData,
+    beforeSaveHTML,
+    skipDiskWrite = false,
+    ...ejsOption
+  } = options;
   const outputPath = getOutput(filename, output);
   const relative = path.relative(path.dirname(outputPath), output);
   /** Relative path string concatenation. E.g: `../`, `../../` */
@@ -110,12 +120,14 @@ export function toHTML(
           if (beforeSaveHTML && typeof beforeSaveHTML === "function") {
             str = beforeSaveHTML(str, output, filename);
           }
-          fs.ensureDirSync(path.dirname(outputPath));
-          fs.outputFileSync(outputPath, str);
-          console.log(
-            "🎉 Create \x1b[32;1m%s\x1b[0m successfully !!!",
-            path.relative(process.cwd(), outputPath),
-          );
+          if (skipDiskWrite == false) {
+            fs.ensureDirSync(path.dirname(outputPath));
+            fs.outputFileSync(outputPath, str);
+            console.log(
+              "🎉 Create \x1b[32;1m%s\x1b[0m successfully !!!",
+              path.relative(process.cwd(), outputPath),
+            );
+          }
           resolve(str);
         }
       },
