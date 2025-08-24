@@ -5,7 +5,7 @@
     "build": "lerna exec --scope @wcj/ejs-cli -- npm run build",
     "watch": "lerna exec --scope @wcj/ejs-cli -- npm run watch",
     "version": "lerna version --exact --force-publish --no-push --no-git-tag-version",
-    "type-check": "lerna exec \"tsc --noEmit\" --scope create-tsbb --scope tsbb --scope @tsbb/* --stream",
+    "type-check": "lerna exec \"tsc --noEmit\" --scope @wcj/ejs-cli",
     "prettier": "prettier --write '**/*.{js,mts,ts,less,md,json}'",
     "clean": "lerna clean --yes",
     "test": "tsbb test",
