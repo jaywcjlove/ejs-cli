@@ -204,6 +204,7 @@ Inject data into a specific template, which needs to be configured in `.ejscrc.m
   },
   "data": {
     "template/about/index.ejs": "./data.json",
+    "template/about/_details.ejs": "./details.json",
     "template/home.ejs": {
       "name": "Hello World",
       "age": 36
@@ -217,6 +218,34 @@ Used in `template/home.ejs` template
 ```ejs
 <h2><%= name %></h2>
 <h3><%= GLOBAL.helloworld %></h3>
+<p><%= name %></p>
+<p><%= age %></p>
+```
+
+By configuring a generic template and its corresponding data file (e.g., `template/about/_details.ejs` with `details.json`), multiple pages can be generated in batch. Templates starting with `_` are normally ignored as generic modules, but when specified in the configuration, they are rendered in a loop based on the array returned by `details.json` to generate multiple pages.
+
+```js
+// -> details.json
+[
+  { name: "vidwall", href: "https://...", title: "Vidwall for macOS" },
+  { name: "mousio-hint", href: "https://...", title: "Mousio Hint for macOS" },
+];
+```
+
+Based on the configured data above, the `_details.ejs` template will generate `2` static pages. The page names are taken from the `name` field in the data, so this field is required.
+
+Example of generated pages:
+
+```
+about/details/mousio-hint.html
+about/details/vidwall.html
+```
+
+The template can use the data from the `details.json` array, for example:
+
+```html
+<p>There are a total of <%= DETAILS.length %> items</p>
+<a href="<%= href %>" target="_blank"> View details of <%= name %> </a>
 ```
 
 ## HTML Minifier
@@ -326,13 +355,16 @@ import UglifyJS from "uglify-js-export";
 import fs from "fs-extra";
 
 /**
- * @type {import('@wcj/ejs-cli/lib/watch.mjs').Options}
+ * @type {import('@wcj/ejs-cli').Options}
  */
 export default {
   /** Chokidar's watch parameter settings */
   watchOption: {},
+  sitemap: true,
+  sitemapPrefix: "https://wangchujiang.com/idoc/",
   /** Injecting data into EJS templates */
   data: {
+    "template/about/_details.ejs": "./details.json",
     "template/home.ejs": {
       name: "Hello World",
       age: 36,

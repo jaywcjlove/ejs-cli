@@ -17,7 +17,7 @@ const options = {
 
 
 /**
- * @type {import('@wcj/ejs-cli/lib/watch.mjs').Options}
+ * @type {import('@wcj/ejs-cli').Options}
  */
 export default {
   watchOption: {
@@ -26,9 +26,12 @@ export default {
   globalData: {
     helloworld: "Hello World! This is a global data"
   },
+  sitemap: true,
+  sitemapPrefix: "https://wangchujiang.com/idoc/",
   data: {
     "template/about/index.ejs": "./about.json",
     "template/index.ejs": "./data.json",
+    "template/about/_details.ejs": "./details.json",
     "template/home.ejs": {
       "name": "Hello World",
       "age": 362
