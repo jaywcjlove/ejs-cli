@@ -123,7 +123,7 @@ export function toHTML(
   output: string,
   data: EjsData = {},
   options: Options = {},
-  detail: TemplateDetail,
+  detail: TemplateDetail = { template: "", data: {} },
 ) {
   const {
     globalData,
