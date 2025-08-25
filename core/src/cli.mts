@@ -192,36 +192,25 @@ function processUnderscoreTemplate(
           .join(path.dirname(templatePath), tempFileName, basename + extname)
           .split(path.sep)
           .join("/");
-        const result = {
+
+        const keyName =
+          typeof result == "string"
+            ? path.basename(result, path.extname(result)).toUpperCase()
+            : tempFileName.toUpperCase();
+        const resultData = {
           ...item,
-          [tempFileName.toLocaleUpperCase()]: data,
+          [keyName]: data,
         };
         details.push({
           template: templatePath,
           templatePath: outputPath,
-          data: result,
+          data: resultData,
         });
       }
     });
   }
 
   return details;
-}
-
-/**
- * Process normal template files
- */
-function processNormalTemplate(
-  templatePath: string,
-  config: Options,
-): TemplateDetail {
-  const result = toEqualPathOfData(templatePath, config.data ?? {});
-  const data = getInjectData(result);
-
-  return {
-    template: templatePath,
-    data: data,
-  };
 }
 
 /**

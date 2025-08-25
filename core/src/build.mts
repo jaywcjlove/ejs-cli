@@ -129,9 +129,15 @@ export function toHTML(
   const relative = path.relative(path.dirname(outputPath), output);
   /** Relative path string concatenation. E.g: `../`, `../../` */
   const PUBLIC_PATH = relative ? relative.split(path.sep).join("/") + "/" : "";
-  const ejsData = { ...(data as Data) };
-  let result = toEqualPathOfData(filename, ejsData);
   return new Promise(async (resolve, reject) => {
+    const ejsData = { ...(data as Data) };
+    let result = toEqualPathOfData(filename, ejsData);
+    const basename = path.basename(filename, path.extname(filename));
+    const tempFileName = basename.replace(/^_+/, "").toLocaleUpperCase();
+    const keyName =
+      typeof result == "string"
+        ? path.basename(result, path.extname(result)).toUpperCase()
+        : tempFileName.toUpperCase();
     if (typeof result === "string") {
       try {
         result = getInjectData(result);
@@ -143,16 +149,31 @@ export function toHTML(
         );
       }
     }
-    let data = {
+
+    let templateData = {
       ...detail.data,
       PUBLIC_PATH,
       GLOBAL: globalData,
       NOW_DATE: new Date(),
     };
-    if (typeof result === "object") {
-      data = { ...result, ...data };
+
+    if (
+      basename.startsWith("_") &&
+      Array.isArray(result) &&
+      tempFileName &&
+      typeof result === "object"
+    ) {
+      detail.data[keyName] = result;
+    } else {
+      templateData = {
+        ...result,
+        ...detail.data,
+        PUBLIC_PATH,
+        GLOBAL: globalData,
+        NOW_DATE: new Date(),
+      };
     }
-    ejs.renderFile(filename, data, ejsOption, (err, str) => {
+    ejs.renderFile(filename, templateData, ejsOption, (err, str) => {
       if (err) {
         reject(err);
       } else {

@@ -172,7 +172,23 @@ The value will be assigned to the template variable of `DATA_NAME`
 <% }); %>
 ```
 
-The rules are the same in configuration.
+The configuration rules differ slightly: when a data file is specified, the template global variable is the data file name in uppercase; when a data object is specified, the variable is the template name in uppercase.
+
+```js
+/**
+ * @type {import('@wcj/ejs-cli').Options}
+ */
+export default {
+  data: {
+    "template/_list.ejs": "./data/list.json", // => LIST
+    "template/about/_details.ejs": [
+      // => DETAILS
+      { name: "vidwall", href: "https://github.com/jaywcjlove" },
+      { name: "mousio-hint", href: "https://x.com/jaywcjlove" },
+    ],
+  },
+};
+```
 
 ### `GLOBAL.PACKAGE`
 
