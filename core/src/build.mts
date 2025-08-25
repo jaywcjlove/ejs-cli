@@ -54,6 +54,16 @@ export interface Options extends EjsOptions {
    * @default false
    */
   skipDiskWrite?: boolean;
+  /**
+   * Enable sitemap generation
+   * @default false
+   */
+  sitemap?: boolean;
+  /**
+   * The prefix to use for the sitemap URLs, E.q: `https://wangchujiang.com/idoc/`
+   * @default ""
+   */
+  sitemapPrefix?: string;
 }
 
 export async function build(
@@ -61,10 +71,24 @@ export async function build(
   output: string,
   options: Options = {},
 ) {
-  const { data: ejsData, ...ejsOption } = options;
+  const { data: ejsData, sitemap, sitemapPrefix, ...ejsOption } = options;
+  const sitemapData: string[] = [];
   entry.forEach((filePath) => {
+    const outputPath = getOutput(filePath, output);
+    const relative = outputPath.replace(output, "").split(path.sep).join("/");
+    sitemapData.push(
+      sitemapPrefix
+        ? (sitemapPrefix + relative).replace(/\/+/g, "/")
+        : relative,
+    );
     toHTML(filePath, output, ejsData, ejsOption);
   });
+  if (sitemap == true) {
+    await fs.outputFile(
+      path.join(output, "sitemap.txt"),
+      sitemapData.join("\n"),
+    );
+  }
   // 拷贝静态资源
   const dirs = [...new Set(getRootDirsAll(entry))].map((dir) => {
     return dir + options.copyPattern;

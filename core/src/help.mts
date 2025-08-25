@@ -14,6 +14,9 @@ Options:
   \x1b[35;1m--global-data\x1b[0m             Must use JSON format to pass and update data in "globalData".
   \x1b[35;1m--rm-whitespace\x1b[0m           Remove all safe-to-remove whitespace, including leading and trailing
   \x1b[35;1m--copy-pattern\x1b[0m            Use shell patterns to match the files that need to be copied.
+  \x1b[35;1m--skip-disk-write\x1b[0m         Skip disk write (default: \x1b[37;1m"false"\x1b[0m)
+  \x1b[35;1m--sitemap\x1b[0m                 Enable sitemap generation (default: \x1b[37;1m"false"\x1b[0m)
+  \x1b[35;1m--sitemap-prefix\x1b[0m          The prefix to use for the sitemap URLs, E.q: \`https://wangchujiang.com/\` (default: \x1b[37;1m""\x1b[0m)
 
 Examples:
 
@@ -21,6 +24,7 @@ Examples:
   $\x1b[35;1m ejsc\x1b[0m "template/*.ejs" "template/about/*.ejs" --watch
   \x1b[30;1m# The above command: matches all \`.ejs\` files in the template folder\x1b[0m
   $\x1b[35;1m ejsc\x1b[0m "template/**/*" --watch
+  $\x1b[35;1m ejsc\x1b[0m "template/**/*" --watch --sitemap --sitemap-prefix 'https://***.com/doc/
   $\x1b[35;1m ejsc\x1b[0m "template/**/*" --data-file "./data.json"
   $\x1b[35;1m ejsc\x1b[0m "template/**/*" --global-data "{\\"name\\": \\"ejs-cli\\"}"
   $\x1b[35;1m ejs-cli\x1b[0m "template/*.ejs" --watch --out build

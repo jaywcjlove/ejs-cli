@@ -6,8 +6,8 @@
   "funding": "https://jaywcjlove.github.io/#/sponsor",
   "scripts": {
     "build:global": "ejs-cli 'template/**/*' -f data.json --global-data '{\"helloworld\": \"ejs-cli\"}'",
-    "build": "ejs-cli 'template/**/*' -f data.json",
-    "start": "ejs-cli 'template/**/*' -f data.json --watch"
+    "build": "ejs-cli 'template/**/*' -f data.json --sitemap --sitemap-prefix 'https://wangchujiang.com/idoc/'",
+    "start": "ejs-cli 'template/**/*' -f data.json --sitemap --sitemap-prefix 'https://wangchujiang.com/idoc/' --watch"
   },
   "devDependencies": {
     "@wcj/ejs-cli": "2.2.0",

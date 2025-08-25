@@ -55,6 +55,14 @@ import { helpStr } from "./help.mjs";
       globalData: {
         type: "string",
       },
+      /** Use this option to enable sitemap generation */
+      sitemap: {
+        type: "boolean",
+        default: false,
+      },
+      sitemapPrefix: {
+        type: "string",
+      },
       copyPattern: {
         type: "string",
         default: "/**/*.{css,js,png,jpg,gif,svg,webp,eot,ttf,woff,woff2}",
@@ -94,6 +102,8 @@ import { helpStr } from "./help.mjs";
       openDelimiter: cli.flags.openDelimiter,
       closeDelimiter: cli.flags.closeDelimiter,
       rmWhitespace: cli.flags.rmWhitespace,
+      sitemap: cli.flags.sitemap,
+      sitemapPrefix: cli.flags.sitemapPrefix,
       copyPattern: cli.flags.copyPattern,
       globalData: {},
       data: {},
