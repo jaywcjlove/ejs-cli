@@ -184,7 +184,7 @@ function processUnderscoreTemplate(
     data.forEach((item) => {
       if (item.name) {
         const extname = path.extname(templatePath);
-        const basename = path.basename(item.name, path.extname(item.name));
+        const basename = item.name;
         const tempFileName = path
           .basename(path.basename(templatePath), ".ejs")
           .replace(/^_+/, "");
