@@ -14,6 +14,6 @@ export async function copyFile(
     path.relative(process.cwd(), outputPath),
   );
   if (option.afterCopyFile && typeof option.afterCopyFile === "function") {
-    option.afterCopyFile(filepath, outputPath);
+    await Promise.resolve(option.afterCopyFile(filepath, outputPath));
   }
 }

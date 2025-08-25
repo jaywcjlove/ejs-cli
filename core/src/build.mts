@@ -30,20 +30,24 @@ export interface Options extends EjsOptions {
    */
   data?: EjsData;
   /**
-   * Pre-Save HTML Callback Method
+   * Pre-Save HTML Callback Method (can be async)
    * @param html
    * @param output
    * @param filename
    * @returns
    */
-  beforeSaveHTML?: (html: string, output: string, filename: string) => string;
+  beforeSaveHTML?: (
+    html: string,
+    output: string,
+    filename: string,
+  ) => string | Promise<string>;
   /**
-   * Callback method after copying files.
+   * Callback method after copying files (can be async).
    * @param filepath
    * @param output
    * @returns
    */
-  afterCopyFile?: (filepath: string, output: string) => void;
+  afterCopyFile?: (filepath: string, output: string) => void | Promise<void>;
   /**
    * Use shell patterns to match the files that need to be copied.
    * @default "/**\/*.{css,js,png,jpg,gif,svg,webp,eot,ttf,woff,woff2}"
@@ -98,14 +102,16 @@ export async function build(
       sitemapData.join("\n"),
     );
   }
-  // 拷贝静态资源
+  // Copy static resources
   const dirs = [...new Set(getRootDirsAll(entry))].map((dir) => {
     return dir + options.copyPattern;
   });
   const data = await glob(dirs, { ignore: "node_modules/**" });
-  data.forEach((filePath) => {
-    copyFile(filePath, output, options);
-  });
+
+  // Process copy operations in parallel
+  await Promise.all(
+    data.map((filePath) => copyFile(filePath, output, options)),
+  );
 }
 
 interface EjsData extends Data {
@@ -173,22 +179,27 @@ export function toHTML(
         NOW_DATE: new Date(),
       };
     }
-    ejs.renderFile(filename, templateData, ejsOption, (err, str) => {
+    ejs.renderFile(filename, templateData, ejsOption, async (err, str) => {
       if (err) {
         reject(err);
       } else {
-        if (beforeSaveHTML && typeof beforeSaveHTML === "function") {
-          str = beforeSaveHTML(str, output, filename);
+        try {
+          if (beforeSaveHTML && typeof beforeSaveHTML === "function") {
+            const result = beforeSaveHTML(str, output, filename);
+            str = await Promise.resolve(result);
+          }
+          if (skipDiskWrite == false) {
+            fs.ensureDirSync(path.dirname(outputPath));
+            fs.outputFileSync(outputPath, str);
+            console.log(
+              "🎉 Create \x1b[32;1m%s\x1b[0m successfully !!!",
+              path.relative(process.cwd(), outputPath),
+            );
+          }
+          resolve(str);
+        } catch (error) {
+          reject(error);
         }
-        if (skipDiskWrite == false) {
-          fs.ensureDirSync(path.dirname(outputPath));
-          fs.outputFileSync(outputPath, str);
-          console.log(
-            "🎉 Create \x1b[32;1m%s\x1b[0m successfully !!!",
-            path.relative(process.cwd(), outputPath),
-          );
-        }
-        resolve(str);
       }
     });
   });
