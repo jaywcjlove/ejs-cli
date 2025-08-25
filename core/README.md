@@ -85,7 +85,7 @@ Options:
   --copy-pattern            Use shell patterns to match the files that need to be copied.
   --skip-disk-write         Skip disk write (default: "false")
   --sitemap                 Enable sitemap generation (default: "false")
-  --sitemap-prefix          The prefix to use for the sitemap URLs, E.q: `https://***.com/doc/` (default: "")
+  --sitemap-prefix          The prefix to use for the sitemap URLs, E.q: 'https://***.com/doc/' (default: "")
 
 Examples:
 
@@ -93,7 +93,7 @@ Examples:
   $ ejsc "template/*.ejs" "template/about/*.ejs" --watch
   # The above command: matches all `.ejs` files in the template folder
   $ ejsc "template/**/*" --watch
-  $ ejsc "template/**/*" --watch --sitemap --sitemap-prefix 'https://***.com/doc/
+  $ ejsc "template/**/*" --watch --sitemap --sitemap-prefix 'https://***.com/doc/'
   $ ejsc "template/**/*" --data-file "./data.json"
   $ ejsc "template/**/*" --global-data "{\"name\": \"ejs-cli\"}"
   $ ejs-cli "template/*.ejs" --watch --out build
