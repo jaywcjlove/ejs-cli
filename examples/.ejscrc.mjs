@@ -31,7 +31,11 @@ export default {
   data: {
     "template/about/index.ejs": "./about.json",
     "template/index.ejs": "./data.json",
-    "template/about/_details.ejs": "./details.json",
+    // "template/about/_details.ejs": "./details.json",
+    "template/about/_details.ejs": [
+      { "name": "vidwall", "href": "https://github.com/jaywcjlove" },
+      { "name": "mousio-hint", "href": "https://x.com/jaywcjlove"  }
+    ],
     "template/home.ejs": {
       "name": "Hello World",
       "age": 362

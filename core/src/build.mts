@@ -81,13 +81,7 @@ export async function build(
 ) {
   const { data: ejsData, sitemap, sitemapPrefix, ...ejsOption } = options;
   details.forEach((data) => {
-    toHTML(
-      data.template,
-      output,
-      { ...data.data, ...ejsData },
-      ejsOption,
-      data,
-    );
+    toHTML(data.template, output, ejsData, ejsOption, data);
   });
 
   if (sitemap == true) {
@@ -149,13 +143,15 @@ export function toHTML(
         );
       }
     }
-    const data = {
+    let data = {
       ...detail.data,
-      ...result,
       PUBLIC_PATH,
       GLOBAL: globalData,
       NOW_DATE: new Date(),
     };
+    if (typeof result === "object") {
+      data = { ...result, ...data };
+    }
     ejs.renderFile(filename, data, ejsOption, (err, str) => {
       if (err) {
         reject(err);

@@ -179,8 +179,7 @@ function processUnderscoreTemplate(
 ): TemplateDetail[] {
   const details: TemplateDetail[] = [];
   const result = toEqualPathOfData(templatePath, config.data ?? {});
-  const data = getInjectData(result, true);
-
+  const data = typeof result == "string" ? getInjectData(result, true) : result;
   if (Array.isArray(data)) {
     data.forEach((item) => {
       if (item.name) {
@@ -193,11 +192,14 @@ function processUnderscoreTemplate(
           .join(path.dirname(templatePath), tempFileName, basename + extname)
           .split(path.sep)
           .join("/");
-
+        const result = {
+          ...item,
+          [tempFileName.toLocaleUpperCase()]: data,
+        };
         details.push({
           template: templatePath,
           templatePath: outputPath,
-          data: item,
+          data: result,
         });
       }
     });
@@ -234,21 +236,16 @@ function buildTemplateDetails(
   entries.forEach((templatePath: string) => {
     const templateData = config.data![templatePath];
 
-    if (typeof templateData === "string") {
-      if (path.basename(templatePath).startsWith("_")) {
-        // Process templates starting with _
+    // Process templates starting with _
+    if (path.basename(templatePath).startsWith("_")) {
+      if (typeof templateData === "string" || Array.isArray(templateData)) {
         const underscoreDetails = processUnderscoreTemplate(
           templatePath,
           config,
         );
         details.push(...underscoreDetails);
-      } else {
-        // Process normal template files
-        const normalDetail = processNormalTemplate(templatePath, config);
-        details.push(normalDetail);
       }
     } else {
-      // Use configured data directly
       details.push({
         template: templatePath,
         data: templateData,

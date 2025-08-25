@@ -198,19 +198,26 @@ Current page compilation time
 Inject data into a specific template, which needs to be configured in `.ejscrc.mjs`:
 
 ```js
-{
-  "globalData": {
-    "helloworld": "Hello Wrold!"
+/**
+ * @type {import('@wcj/ejs-cli').Options}
+ */
+export default {
+  globalData: {
+    helloworld: "Hello Wrold!",
   },
-  "data": {
+  data: {
     "template/about/index.ejs": "./data.json",
     "template/about/_details.ejs": "./details.json",
+    "template/about/_list.ejs": [
+      { name: "vidwall", href: "https://github.com/jaywcjlove" },
+      { name: "mousio-hint", href: "https://x.com/jaywcjlove" },
+    ],
     "template/home.ejs": {
-      "name": "Hello World",
-      "age": 36
-    }
-  }
-}
+      name: "Hello World",
+      age: 36,
+    },
+  },
+};
 ```
 
 Used in `template/home.ejs` template
@@ -268,7 +275,7 @@ const options = {
 };
 
 /**
- * @type {import('@wcj/ejs-cli/lib/watch.mjs').Options}
+ * @type {import('@wcj/ejs-cli').Options}
  */
 export default {
   watchOption: {},
@@ -365,6 +372,10 @@ export default {
   /** Injecting data into EJS templates */
   data: {
     "template/about/_details.ejs": "./details.json",
+    "template/about/_details2.ejs": [
+      { name: "vidwall" },
+      { name: "mousio-hint" },
+    ],
     "template/home.ejs": {
       name: "Hello World",
       age: 36,
