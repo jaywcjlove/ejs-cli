@@ -113,7 +113,7 @@ $ ejsc &#x22;template/*.ejs&#x22; &#x22;template/about/*.ejs&#x22; --watch
 </span><span class="code-line line-number" line="15">  --copy-pattern            Use shell patterns to match the files that need to be copied.
 </span><span class="code-line line-number" line="16">  --skip-disk-write         Skip disk <span class="token function">write</span> <span class="token punctuation">(</span>default: <span class="token string">"false"</span><span class="token punctuation">)</span>
 </span><span class="code-line line-number" line="17">  <span class="token parameter variable">--sitemap</span>                 Enable sitemap generation <span class="token punctuation">(</span>default: <span class="token string">"false"</span><span class="token punctuation">)</span>
-</span><span class="code-line line-number" line="18">  --sitemap-prefix          The prefix to use <span class="token keyword">for</span> the sitemap URLs, E.q: <span class="token variable"><span class="token variable">`</span>https://***.com/doc/<span class="token variable">`</span></span> <span class="token punctuation">(</span>default: <span class="token string">""</span><span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="18">  --sitemap-prefix          The prefix to use <span class="token keyword">for</span> the sitemap URLs, E.q: <span class="token string">'https://***.com/doc/'</span> <span class="token punctuation">(</span>default: <span class="token string">""</span><span class="token punctuation">)</span>
 </span><span class="code-line line-number" line="19">
 </span><span class="code-line line-number" line="20">Examples:
 </span><span class="code-line line-number" line="21">
@@ -121,7 +121,7 @@ $ ejsc &#x22;template/*.ejs&#x22; &#x22;template/about/*.ejs&#x22; --watch
 </span><span class="code-line line-number" line="23">  $ ejsc <span class="token string">"template/*.ejs"</span> <span class="token string">"template/about/*.ejs"</span> <span class="token parameter variable">--watch</span>
 </span><span class="code-line line-number" line="24">  <span class="token comment"># The above command: matches all `.ejs` files in the template folder</span>
 </span><span class="code-line line-number" line="25">  $ ejsc <span class="token string">"template/**/*"</span> <span class="token parameter variable">--watch</span>
-</span><span class="code-line line-number" line="26">  $ ejsc <span class="token string">"template/**/*"</span> <span class="token parameter variable">--watch</span> <span class="token parameter variable">--sitemap</span> --sitemap-prefix 'https://***.com/doc/
+</span><span class="code-line line-number" line="26">  $ ejsc <span class="token string">"template/**/*"</span> <span class="token parameter variable">--watch</span> <span class="token parameter variable">--sitemap</span> --sitemap-prefix <span class="token string">'https://***.com/doc/'</span>
 </span><span class="code-line line-number" line="27">  $ ejsc <span class="token string">"template/**/*"</span> --data-file <span class="token string">"./data.json"</span>
 </span><span class="code-line line-number" line="28">  $ ejsc <span class="token string">"template/**/*"</span> --global-data <span class="token string">"{<span class="token entity" title="\&#x22;">\"</span>name<span class="token entity" title="\&#x22;">\"</span>: <span class="token entity" title="\&#x22;">\"</span>ejs-cli<span class="token entity" title="\&#x22;">\"</span>}"</span>
 </span><span class="code-line line-number" line="29">  $ ejs-cli <span class="token string">"template/*.ejs"</span> <span class="token parameter variable">--watch</span> <span class="token parameter variable">--out</span> build
@@ -144,7 +144,7 @@ Options:
   --copy-pattern            Use shell patterns to match the files that need to be copied.
   --skip-disk-write         Skip disk write (default: &#x22;false&#x22;)
   --sitemap                 Enable sitemap generation (default: &#x22;false&#x22;)
-  --sitemap-prefix          The prefix to use for the sitemap URLs, E.q: &#x60;https://***.com/doc/&#x60; (default: &#x22;&#x22;)
+  --sitemap-prefix          The prefix to use for the sitemap URLs, E.q: &#x27;https://***.com/doc/&#x27; (default: &#x22;&#x22;)
 
 Examples:
 
@@ -152,7 +152,7 @@ Examples:
   $ ejsc &#x22;template/*.ejs&#x22; &#x22;template/about/*.ejs&#x22; --watch
   # The above command: matches all &#x60;.ejs&#x60; files in the template folder
   $ ejsc &#x22;template/**/*&#x22; --watch
-  $ ejsc &#x22;template/**/*&#x22; --watch --sitemap --sitemap-prefix &#x27;https://***.com/doc/
+  $ ejsc &#x22;template/**/*&#x22; --watch --sitemap --sitemap-prefix &#x27;https://***.com/doc/&#x27;
   $ ejsc &#x22;template/**/*&#x22; --data-file &#x22;./data.json&#x22;
   $ ejsc &#x22;template/**/*&#x22; --global-data &#x22;{\&#x22;name\&#x22;: \&#x22;ejs-cli\&#x22;}&#x22;
   $ ejs-cli &#x22;template/*.ejs&#x22; --watch --out build
