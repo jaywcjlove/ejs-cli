@@ -17,7 +17,8 @@ export interface Options extends EjsOptions {
    */
   globalData?: Data;
   /**
-   * Injecting data into EJS templates
+   * Injects specific data into individual EJS templates.
+   *
    * @example
    * ```js
    * {
@@ -30,11 +31,13 @@ export interface Options extends EjsOptions {
    */
   data?: EjsData;
   /**
-   * Pre-Save HTML Callback Method (can be async)
-   * @param html
-   * @param output
-   * @param filename
-   * @returns
+   * A callback method invoked before saving the generated HTML.
+   * This method can be asynchronous.
+   *
+   * @param html - The generated HTML content.
+   * @param output - The output directory path.
+   * @param filename - The name of the file being processed.
+   * @returns The modified HTML content or a promise resolving to it.
    */
   beforeSaveHTML?: (
     html: string,
@@ -42,32 +45,48 @@ export interface Options extends EjsOptions {
     filename: string,
   ) => string | Promise<string>;
   /**
-   * Callback method after copying files (can be async).
-   * @param filepath
-   * @param output
-   * @returns
+   * A callback method invoked after copying files.
+   * This method can be asynchronous.
+   *
+   * @param filepath - The path of the file being copied.
+   * @param output - The output directory path.
+   * @returns A void result or a promise resolving to void.
    */
   afterCopyFile?: (filepath: string, output: string) => void | Promise<void>;
+
   /**
-   * Use shell patterns to match the files that need to be copied.
+   * Specifies the shell pattern to match files that need to be copied.
+   *
    * @default "/**\/*.{css,js,png,jpg,gif,svg,webp,eot,ttf,woff,woff2}"
    */
   copyPattern?: string;
   /**
-   * Skip disk write
+   * Determines whether to skip writing files to disk.
+   *
    * @default false
    */
   skipDiskWrite?: boolean;
   /**
-   * Enable sitemap generation
+   * Enables sitemap generation.
+   *
    * @default false
    */
   sitemap?: boolean;
   /**
-   * The prefix to use for the sitemap URLs, E.q: `https://wangchujiang.com/idoc/`
+   * Specifies the prefix to use for sitemap URLs.
+   * For example: `https://wangchujiang.com/idoc/`
+   *
    * @default ""
    */
   sitemapPrefix?: string;
+  /**
+   * A callback method invoked after the build process is completed.
+   *
+   * @param sitemap - The generated sitemap content.
+   * @param options - The options used during the build process.
+   * @param details - An array of template details processed during the build.
+   */
+  done?: (sitemap: string, options: Options, details: TemplateDetail[]) => void;
 }
 
 /** Template detail mapping data */
@@ -84,12 +103,15 @@ export async function build(
   details: TemplateDetail[] = [],
 ) {
   const { data: ejsData, sitemap, sitemapPrefix, ...ejsOption } = options;
+  const sitemapData: string[] = [];
   if (sitemap == true) {
-    const sitemapData: string[] = details.map((detail) => {
+    details.forEach((detail) => {
       let templatePath = detail.templatePath ?? detail.template;
       const outputPath = getOutput(templatePath, output);
       const relative = outputPath.replace(output, "").split(path.sep).join("/");
-      return sitemapPrefix ? buildUrl(sitemapPrefix, relative) : relative;
+      sitemapData.push(
+        sitemapPrefix ? buildUrl(sitemapPrefix, relative) : relative,
+      );
     });
     await fs.outputFile(
       path.join(output, "sitemap.txt"),
@@ -109,6 +131,7 @@ export async function build(
   await Promise.all(
     data.map((filePath) => copyFile(filePath, output, options)),
   );
+  ejsOption.done && ejsOption.done(sitemapData.join("\n"), options, details);
 }
 
 interface EjsData extends Data {
@@ -203,29 +226,6 @@ export function toHTML(
 }
 
 export function buildUrl(sitemapPrefix: string = "", relative: string = "") {
-  // // Split relative into path and query
-  // let [path, query] = relative.split("?");
-
-  // // Encode each segment of the relative path
-  // path = path
-  //   .split("/")
-  //   .map((segment) => encodeURIComponent(segment))
-  //   .join("/");
-
-  // // If there is a query, encode only the values
-  // if (query) {
-  //   query = query
-  //     .split("&")
-  //     .map((pair) => {
-  //       const [key, value] = pair.split("=");
-  //       return `${key}=${encodeURIComponent(value || "")}`;
-  //     })
-  //     .join("&");
-  //   relative = path + "?" + query;
-  // } else {
-  //   relative = path;
-  // }
-
   // Split relative into path and query
   let [path, query] = relative.split("?");
 

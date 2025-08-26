@@ -56,5 +56,8 @@ export default {
       fs.writeFileSync(outputPath, result.styles)
       console.log(`🐝 Compress css file success! ${outputPath}`)
     }
+  },
+  done: (sitemap = "", options = {}, details = []) => {
+    console.log('🎉 Build process completed successfully!');
   }
 };
