@@ -84,9 +84,6 @@ export async function build(
   details: TemplateDetail[] = [],
 ) {
   const { data: ejsData, sitemap, sitemapPrefix, ...ejsOption } = options;
-  details.forEach((data) => {
-    toHTML(data.template, output, ejsData, ejsOption, data);
-  });
   if (sitemap == true) {
     const sitemapData: string[] = details.map((detail) => {
       let templatePath = detail.templatePath ?? detail.template;
@@ -99,6 +96,9 @@ export async function build(
       sitemapData.join("\n"),
     );
   }
+  details.forEach((data) => {
+    toHTML(data.template, output, ejsData, ejsOption, data);
+  });
   // Copy static resources
   const dirs = [...new Set(getRootDirsAll(entry))].map((dir) => {
     return dir + options.copyPattern;
@@ -203,16 +203,50 @@ export function toHTML(
 }
 
 export function buildUrl(sitemapPrefix: string = "", relative: string = "") {
+  // // Split relative into path and query
+  // let [path, query] = relative.split("?");
+
+  // // Encode each segment of the relative path
+  // path = path
+  //   .split("/")
+  //   .map((segment) => encodeURIComponent(segment))
+  //   .join("/");
+
+  // // If there is a query, encode only the values
+  // if (query) {
+  //   query = query
+  //     .split("&")
+  //     .map((pair) => {
+  //       const [key, value] = pair.split("=");
+  //       return `${key}=${encodeURIComponent(value || "")}`;
+  //     })
+  //     .join("&");
+  //   relative = path + "?" + query;
+  // } else {
+  //   relative = path;
+  // }
+
   // Split relative into path and query
   let [path, query] = relative.split("?");
 
-  // Encode each segment of the relative path
+  // Encode each segment of the relative path, but skip non-ASCII characters (e.g., Chinese characters)
   path = path
     .split("/")
-    .map((segment) => encodeURIComponent(segment))
+    .map((segment) => {
+      return segment
+        .split("")
+        .map((char) => {
+          // Check if the character is non-ASCII (e.g., Chinese characters)
+          if (/[\u4e00-\u9fa5]/.test(char)) {
+            return char; // Leave Chinese characters unchanged
+          }
+          return encodeURIComponent(char); // Encode other characters
+        })
+        .join("");
+    })
     .join("/");
 
-  // If there is a query, encode only the values
+  // If there is a query, encode only the values (keep keys as they are)
   if (query) {
     query = query
       .split("&")
