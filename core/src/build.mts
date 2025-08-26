@@ -87,15 +87,12 @@ export async function build(
   details.forEach((data) => {
     toHTML(data.template, output, ejsData, ejsOption, data);
   });
-
   if (sitemap == true) {
     const sitemapData: string[] = details.map((detail) => {
       let templatePath = detail.templatePath ?? detail.template;
       const outputPath = getOutput(templatePath, output);
       const relative = outputPath.replace(output, "").split(path.sep).join("/");
-      return sitemapPrefix
-        ? (sitemapPrefix + relative).replace(/\/+/g, "/")
-        : relative;
+      return sitemapPrefix ? buildUrl(sitemapPrefix, relative) : relative;
     });
     await fs.outputFile(
       path.join(output, "sitemap.txt"),
@@ -203,6 +200,34 @@ export function toHTML(
       }
     });
   });
+}
+
+export function buildUrl(sitemapPrefix: string = "", relative: string = "") {
+  // Split relative into path and query
+  let [path, query] = relative.split("?");
+
+  // Encode each segment of the relative path
+  path = path
+    .split("/")
+    .map((segment) => encodeURIComponent(segment))
+    .join("/");
+
+  // If there is a query, encode only the values
+  if (query) {
+    query = query
+      .split("&")
+      .map((pair) => {
+        const [key, value] = pair.split("=");
+        return `${key}=${encodeURIComponent(value || "")}`;
+      })
+      .join("&");
+    relative = path + "?" + query;
+  } else {
+    relative = path;
+  }
+
+  // Combine with sitemapPrefix without modifying it
+  return (sitemapPrefix + relative).replace(/(?<!:)\/{2,}/g, "/");
 }
 
 export const getInjectData = (fileName: string, rawData: boolean = false) => {

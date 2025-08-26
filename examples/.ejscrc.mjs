@@ -33,8 +33,8 @@ export default {
     "template/index.ejs": "./data.json",
     "template/_list.ejs": "./template/about/list.json",
     "template/about/_details.ejs": [
-      { "name": "vidwall v1.0.0.0", "href": "https://github.com/jaywcjlove" },
-      { "name": "mousio-hint", "href": "https://x.com/jaywcjlove"  }
+      { "name": "vidwall  _v1.0.0.0", "href": "https://github.com/jaywcjlove" },
+      { "name": "mousio - hint", "href": "https://x.com/jaywcjlove"  }
     ],
     "template/home.ejs": {
       "name": "Hello World",
