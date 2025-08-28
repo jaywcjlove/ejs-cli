@@ -36,10 +36,10 @@ export default {
       { "name": "vidwall  _v1.0.0.0 动态壁纸", "href": "https://github.com/jaywcjlove" },
       { "name": "mousio - hint", "href": "https://x.com/jaywcjlove"  }
     ],
-    "template/home.ejs": {
-      "name": "Hello World",
-      "age": 362
-    }
+    // "template/home.ejs": {
+    //   "name": "Hello World",
+    //   "age": 362
+    // }
   },
   beforeSaveHTML: (html, output, filename) => {
     const minHTML = minify(html, options)

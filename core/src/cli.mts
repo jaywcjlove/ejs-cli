@@ -293,9 +293,6 @@ async function main() {
       return;
     }
 
-    // 3. Validate input parameters
-    validateInput(cli);
-
     // 4. Set up basic variables
     const output = path.resolve(process.cwd(), cli.flags.out);
     const isWatch = cli.flags.watch;
@@ -305,6 +302,14 @@ async function main() {
 
     // 6. Load configuration file
     const resultConf = await loadConfiguration(defaultOption);
+
+    if (cli.input.length > 0) {
+      for (const [key, _] of Object.entries(resultConf.data ?? {})) {
+        if (!cli.input.includes(key)) {
+          delete (resultConf.data ?? {})[key];
+        }
+      }
+    }
 
     // 7. Get template file entries
     let entries = await getTemplateEntries(cli.input);
