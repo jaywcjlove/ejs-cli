@@ -20,7 +20,7 @@
   },
   "workspaces": [
     "core",
-    "examples"
+    "examples/**"
   ],
   "lint-staged": {
     "*.{js,mts,ts,md,json}": [

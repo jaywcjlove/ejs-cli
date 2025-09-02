@@ -1,0 +1,16 @@
+{
+  "name": "@wcj/base",
+  "version": "3.1.5",
+  "description": "",
+  "funding": "https://jaywcjlove.github.io/#/sponsor",
+  "scripts": {
+    "build": "ejs-cli 'template/*' -f data.json",
+    "start": "ejs-cli 'template/*' -f data.json --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@wcj/ejs-cli": "3.1.5"
+  }
+}
