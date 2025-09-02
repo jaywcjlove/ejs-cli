@@ -159,7 +159,7 @@ async function getTemplateEntries(input: string[]): Promise<string[]> {
  * Filter entry files - remove files starting with _ (unless they have data mapping in config)
  */
 function filterEntries(entries: string[], config: Options): string[] {
-  if (config.data) {
+  if (config.data && Object.keys(config.data).length > 0) {
     return entries.filter((file) =>
       Object.keys(config.data || {}).includes(file),
     );
@@ -303,14 +303,6 @@ async function main() {
     // 6. Load configuration file
     const resultConf = await loadConfiguration(defaultOption);
 
-    if (cli.input.length > 0) {
-      for (const [key, _] of Object.entries(resultConf.data ?? {})) {
-        if (!cli.input.includes(key)) {
-          delete (resultConf.data ?? {})[key];
-        }
-      }
-    }
-
     // 7. Get template file entries
     let entries = await getTemplateEntries(cli.input);
 
@@ -319,6 +311,14 @@ async function main() {
 
     // 9. Build template details list
     const details = buildTemplateDetails(entries, resultConf);
+
+    if (cli.input.length > 0) {
+      for (const [key, _] of Object.entries(resultConf.data ?? {})) {
+        if (!entries.includes(key)) {
+          delete (resultConf.data ?? {})[key];
+        }
+      }
+    }
 
     // 10. Process data file option
     processDataFileOption(cli.flags, resultConf);
