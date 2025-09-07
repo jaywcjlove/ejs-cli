@@ -1,6 +1,6 @@
 {
   "name": "@wcj/examples",
-  "version": "3.1.6",
+  "version": "3.2.0",
   "description": "",
   "funding": "https://jaywcjlove.github.io/#/sponsor",
   "scripts": {
@@ -10,7 +10,7 @@
     "start": "ejs-cli 'template/**/*' -f data.json --watch"
   },
   "devDependencies": {
-    "@wcj/ejs-cli": "3.1.6",
+    "@wcj/ejs-cli": "3.2.0",
     "clean-css": "^5.3.3",
     "html-minifier": "^4.0.0",
     "uglify-js-export": "^3.18.0"
