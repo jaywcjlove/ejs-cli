@@ -52,6 +52,7 @@ export async function watch(
               { ...data.data, ...ejsData },
               ejsOption,
               data,
+              true,
             );
           });
         } catch (error) {

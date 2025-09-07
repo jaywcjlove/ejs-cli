@@ -43,6 +43,7 @@ export interface Options extends EjsOptions {
     html: string,
     output: string,
     filename: string,
+    isWatch: boolean,
   ) => string | Promise<string>;
   /**
    * A callback method invoked after copying files.
@@ -119,7 +120,7 @@ export async function build(
     );
   }
   details.forEach((data) => {
-    toHTML(data.template, output, ejsData, ejsOption, data);
+    toHTML(data.template, output, ejsData, ejsOption, data, false);
   });
   // Copy static resources
   const dirs = [...new Set(getRootDirsAll(entry))].map((dir) => {
@@ -144,6 +145,7 @@ export function toHTML(
   data: EjsData = {},
   options: Options = {},
   detail: TemplateDetail = { template: "", data: {} },
+  isWatch: boolean = false,
 ) {
   const {
     globalData,
@@ -205,7 +207,7 @@ export function toHTML(
       } else {
         try {
           if (beforeSaveHTML && typeof beforeSaveHTML === "function") {
-            const result = beforeSaveHTML(str, output, filename);
+            const result = beforeSaveHTML(str, output, filename, isWatch);
             str = await Promise.resolve(result);
           }
           if (skipDiskWrite == false) {
