@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title><%= name %> - Test Product</title>
+</head>
+<body>
+  <h1><%= title %></h1>
+  <p><%= description %></p>
+  <div class="meta">
+    <p>Version: <%= version %></p>
+    <p>Price: $<%= price.toFixed(2) %></p>
+    <p>Rating: <%= rating.toFixed(1) %>/5</p>
+    <p>Tags: <%= tags.join(', ') %></p>
+  </div>
+  <a href="<%= href %>">View Product</a>
+  <p>Generated: <%= NOW_DATE %></p>
+</body>
+</html>

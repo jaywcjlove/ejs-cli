@@ -2,6 +2,7 @@ import ejs, { type Data, type Options as EjsOptions } from "ejs";
 import path from "path";
 import { glob } from "glob";
 import fs from "fs-extra";
+import os from "os";
 import { copyFile } from "./copyFile.mjs";
 
 export interface Options extends EjsOptions {
@@ -97,6 +98,32 @@ export type TemplateDetail = {
   data: Record<string, any>;
 };
 
+/**
+ * Process template rendering with concurrency control to prevent memory overflow
+ * @param tasks Array of rendering tasks
+ * @param concurrency Maximum number of concurrent tasks
+ */
+async function processConcurrentRender(
+  tasks: Array<() => Promise<any>>,
+  concurrency: number = 5,
+) {
+  const executing: Promise<any>[] = [];
+  for (const task of tasks) {
+    const promise = task().catch((error) => {
+      console.error("Render error:", error);
+    });
+    executing.push(promise);
+    if (executing.length >= concurrency) {
+      await Promise.race(executing);
+      executing.splice(
+        executing.findIndex((p) => p === promise),
+        1,
+      );
+    }
+  }
+  await Promise.all(executing);
+}
+
 export async function build(
   entry: string[] = [],
   output: string,
@@ -119,9 +146,17 @@ export async function build(
       sitemapData.join("\n"),
     );
   }
-  details.forEach((data) => {
-    toHTML(data.template, output, ejsData, ejsOption, data, false);
-  });
+
+  // Create rendering tasks with controlled concurrency to prevent memory overflow
+  const renderTasks = details.map(
+    (data) => () =>
+      toHTML(data.template, output, ejsData, ejsOption, data, false),
+  );
+
+  // Process with concurrency limit (default 5 concurrent renders)
+  const concurrency = Math.max(2, Math.floor(os.cpus().length / 2));
+  await processConcurrentRender(renderTasks, concurrency);
+
   // Copy static resources
   const dirs = [...new Set(getRootDirsAll(entry))].map((dir) => {
     return dir + options.copyPattern;
@@ -185,13 +220,32 @@ export function toHTML(
       NOW_DATE: new Date(),
     };
 
+    // Handle array data for batch page generation
     if (
       basename.startsWith("_") &&
       Array.isArray(result) &&
       tempFileName &&
       typeof result === "object"
     ) {
-      detail.data[keyName] = result;
+      // Process array data items one by one to prevent memory overflow
+      try {
+        await processArrayDataBatch(
+          result as Array<Record<string, any>>,
+          filename,
+          output,
+          detail,
+          keyName,
+          ejsOption,
+          { ...templateData, [keyName]: [] },
+          beforeSaveHTML,
+          skipDiskWrite,
+          globalData,
+          PUBLIC_PATH,
+        );
+        resolve(undefined);
+      } catch (error) {
+        reject(error);
+      }
     } else {
       templateData = {
         ...result,
@@ -200,31 +254,116 @@ export function toHTML(
         GLOBAL: globalData,
         NOW_DATE: new Date(),
       };
-    }
-    ejs.renderFile(filename, templateData, ejsOption, async (err, str) => {
-      if (err) {
-        reject(err);
-      } else {
-        try {
-          if (beforeSaveHTML && typeof beforeSaveHTML === "function") {
-            const result = beforeSaveHTML(str, output, filename, isWatch);
-            str = await Promise.resolve(result);
+      ejs.renderFile(filename, templateData, ejsOption, async (err, str) => {
+        if (err) {
+          reject(err);
+        } else {
+          try {
+            if (beforeSaveHTML && typeof beforeSaveHTML === "function") {
+              const result = beforeSaveHTML(str, output, filename, isWatch);
+              str = await Promise.resolve(result);
+            }
+            if (skipDiskWrite == false) {
+              fs.ensureDirSync(path.dirname(outputPath));
+              fs.outputFileSync(outputPath, str);
+              console.log(
+                "🎉 Create \x1b[32;1m%s\x1b[0m successfully !!!",
+                path.relative(process.cwd(), outputPath),
+              );
+            }
+            resolve(str);
+          } catch (error) {
+            reject(error);
           }
-          if (skipDiskWrite == false) {
-            fs.ensureDirSync(path.dirname(outputPath));
-            fs.outputFileSync(outputPath, str);
-            console.log(
-              "🎉 Create \x1b[32;1m%s\x1b[0m successfully !!!",
-              path.relative(process.cwd(), outputPath),
-            );
-          }
-          resolve(str);
-        } catch (error) {
-          reject(error);
         }
-      }
-    });
+      });
+    }
   });
+}
+
+/**
+ * Process array data in batches to prevent memory overflow
+ * Each item in the array generates a separate page
+ */
+async function processArrayDataBatch(
+  arrayData: Array<Record<string, any>>,
+  filename: string,
+  output: string,
+  detail: TemplateDetail,
+  keyName: string,
+  ejsOption: Options,
+  baseTemplateData: Record<string, any>,
+  beforeSaveHTML?: (
+    html: string,
+    output: string,
+    filename: string,
+    isWatch: boolean,
+  ) => string | Promise<string>,
+  skipDiskWrite: boolean = false,
+  globalData?: Data,
+  PUBLIC_PATH: string = "",
+) {
+  // Process items in batches to manage memory
+  const batchSize = 20; // Process 20 items at a time
+  for (let i = 0; i < arrayData.length; i += batchSize) {
+    const batch = arrayData.slice(i, i + batchSize);
+
+    // Process items in current batch sequentially
+    for (const item of batch) {
+      if (!item.name) {
+        console.warn("Warning: Data item missing 'name' field, skipping");
+        continue;
+      }
+
+      const templateData = {
+        ...item,
+        ...detail.data,
+        [keyName]: item,
+        PUBLIC_PATH,
+        GLOBAL: globalData,
+        NOW_DATE: new Date(),
+      };
+
+      await new Promise<void>((resolve, reject) => {
+        ejs.renderFile(filename, templateData, ejsOption, async (err, str) => {
+          if (err) {
+            reject(err);
+          } else {
+            try {
+              if (beforeSaveHTML && typeof beforeSaveHTML === "function") {
+                const result = beforeSaveHTML(str, output, filename, false);
+                str = await Promise.resolve(result);
+              }
+              if (skipDiskWrite == false) {
+                const itemOutputPath = getOutput(
+                  detail.templatePath ??
+                    detail.template.replace(/_/, item.name),
+                  output,
+                );
+                fs.ensureDirSync(path.dirname(itemOutputPath));
+                fs.outputFileSync(itemOutputPath, str);
+                console.log(
+                  "🎉 Create \x1b[32;1m%s\x1b[0m successfully !!!",
+                  path.relative(process.cwd(), itemOutputPath),
+                );
+              }
+              resolve();
+            } catch (error) {
+              reject(error);
+            }
+          }
+        });
+      });
+
+      // Force garbage collection if available (only works with --expose-gc flag)
+      if (global.gc && i % 100 === 0) {
+        global.gc();
+      }
+    }
+
+    // Allow event loop to process other tasks
+    await new Promise((resolve) => setImmediate(resolve));
+  }
 }
 
 export function buildUrl(sitemapPrefix: string = "", relative: string = "") {
