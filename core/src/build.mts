@@ -104,14 +104,16 @@ export type TemplateDetail = {
  * @param concurrency Maximum number of concurrent tasks
  */
 async function processConcurrentRender(
-  tasks: Array<() => Promise<any>>,
+  tasks: Array<() => Promise<unknown>>,
   concurrency: number = 5,
 ) {
-  const executing: Promise<any>[] = [];
+  const executing: Promise<void>[] = [];
   for (const task of tasks) {
-    const promise = task().catch((error) => {
-      console.error("Render error:", error);
-    });
+    const promise: Promise<void> = task()
+      .then(() => undefined)
+      .catch((error) => {
+        console.error("Render error:", error);
+      });
     executing.push(promise);
     if (executing.length >= concurrency) {
       await Promise.race(executing);
